@@ -14,7 +14,7 @@ namespace Gameplay.Character
         
         private float rotateSpeedMovement = 0.075f;
         private float rotateVelocity;
-
+        float rotationY;
         private ITargetable _target;
         
         private void Update()
@@ -24,17 +24,16 @@ namespace Gameplay.Character
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, AttackRange))
                 {
+                    Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
+                    rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
+                        rotationToLookAt.eulerAngles.y,
+                        ref rotateVelocity,
+                        rotateSpeedMovement * Time.deltaTime);
+                    _animationController.SetAttackState();
+                    transform.eulerAngles = new Vector3(0, rotationY, 0);
                     if (hit.collider.TryGetComponent(out ITargetable target))
                     {
-                        _animationController.SetAttackState();
                         _target = target;
-                        Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                        float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                            rotationToLookAt.eulerAngles.y,
-                            ref rotateVelocity,
-                            rotateSpeedMovement * Time.deltaTime);
-
-                        transform.eulerAngles = new Vector3(0, rotationY + 46f, 0);
                     }
                 }
             }
