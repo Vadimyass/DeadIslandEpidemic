@@ -11,7 +11,6 @@ namespace Gameplay.Character
         public float AttackRange = 10;
         [SerializeField] private MovementController _movementController;
         [SerializeField] private CharacterAnimationController _animationController;
-        
         private float rotateSpeedMovement = 0.075f;
         private float rotateVelocity;
         float rotationY;
@@ -21,16 +20,16 @@ namespace Gameplay.Character
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                Quaternion rotationToLookAt = Quaternion.LookRotation(Input.mousePosition - transform.position);
+                rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
+                    rotationToLookAt.eulerAngles.y,
+                    ref rotateVelocity,
+                    rotateSpeedMovement * Time.deltaTime);
+                _animationController.SetAttackState();
+                transform.eulerAngles = new Vector3(0, rotationY, 0);
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, AttackRange))
                 {
-                    Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                    rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                        rotationToLookAt.eulerAngles.y,
-                        ref rotateVelocity,
-                        rotateSpeedMovement * Time.deltaTime);
-                    _animationController.SetAttackState();
-                    transform.eulerAngles = new Vector3(0, rotationY, 0);
                     if (hit.collider.TryGetComponent(out ITargetable target))
                     {
                         _target = target;
@@ -41,7 +40,10 @@ namespace Gameplay.Character
 
         private void Attack()
         {
-            _target.ApplyDamage(10);
+            if (_target != null)
+            {
+                _target.ApplyDamage(10);
+            }
         }
     }
 }
