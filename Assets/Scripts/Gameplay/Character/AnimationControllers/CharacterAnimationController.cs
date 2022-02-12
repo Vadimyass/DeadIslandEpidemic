@@ -9,6 +9,7 @@ namespace Gameplay.Character.AnimationControllers
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementController _characterMovement;
+        //[SerializeField] private CombatController _characterCombat;
         private bool _isAttacking = false;
 
         private void Update()

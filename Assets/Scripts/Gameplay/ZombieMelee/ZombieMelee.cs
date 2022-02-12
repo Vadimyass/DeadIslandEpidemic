@@ -10,6 +10,6 @@ public class ZombieMelee : MonoBehaviour,ITargetable
     public void ApplyDamage(int damage)
     {
         Health -= damage;
-        Debug.LogError(Health);
+        Debug.Log(Health);
     }
 }
