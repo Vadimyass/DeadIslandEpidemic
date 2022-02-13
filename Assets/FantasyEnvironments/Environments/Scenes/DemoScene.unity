@@ -2496,6 +2496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6050125016723734520}
   _characterMovement: {fileID: 1035160363823808314}
+  _characterCombat: {fileID: 1035160363823808315}
 --- !u!114 &1035160363823808314
 MonoBehaviour:
   m_ObjectHideFlags: 0

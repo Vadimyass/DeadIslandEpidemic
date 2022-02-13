@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace Gameplay.Character
 {
+    public enum CombatState
+    {
+        Melee,
+        Range
+    }
     public class CombatController : MonoBehaviour
     {
         public float AttackRange = 10;
@@ -15,9 +20,22 @@ namespace Gameplay.Character
         private float rotateVelocity;
         float rotationY;
         private ITargetable _target;
-        
+        private CombatState _combatState;
+        public CombatState CombatState => _combatState;
+
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                if (_combatState == CombatState.Melee)
+                {
+                    _combatState = CombatState.Range;
+                }
+                else
+                {
+                    _combatState = CombatState.Melee;
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Quaternion rotationToLookAt = Quaternion.LookRotation(Input.mousePosition - transform.position);
@@ -28,12 +46,19 @@ namespace Gameplay.Character
                 _animationController.SetAttackState();
                 transform.eulerAngles = new Vector3(0, rotationY, 0);
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, AttackRange))
+                if (_combatState == CombatState.Melee)
                 {
-                    if (hit.collider.TryGetComponent(out ITargetable target))
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, AttackRange))
                     {
-                        _target = target;
+                        if (hit.collider.TryGetComponent(out ITargetable target))
+                        {
+                            _target = target;
+                        }
                     }
+                }
+                else
+                {
+                    Shoot();
                 }
             }
         }
@@ -44,6 +69,10 @@ namespace Gameplay.Character
             {
                 _target.ApplyDamage(10);
             }
+        }
+        private void Shoot()
+        {
+            Debug.Log("Babah");
         }
     }
 }

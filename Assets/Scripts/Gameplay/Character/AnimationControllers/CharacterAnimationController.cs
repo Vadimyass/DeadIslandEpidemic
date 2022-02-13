@@ -9,11 +9,19 @@ namespace Gameplay.Character.AnimationControllers
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementController _characterMovement;
-        //[SerializeField] private CombatController _characterCombat;
+        [SerializeField] private CombatController _characterCombat;
         private bool _isAttacking = false;
 
         private void Update()
         {
+            if(_characterCombat.CombatState == CombatState.Melee)
+            {
+                _animator.SetBool("IsMelee", true);
+            }
+            else
+            {
+                _animator.SetBool("IsMelee", false);
+            }
             if (_characterMovement.CharacterMovementState == CharacterMovementState.Movement)
             {
                 _animator.SetFloat("Speed",_characterMovement.SpeedMagnitude);
