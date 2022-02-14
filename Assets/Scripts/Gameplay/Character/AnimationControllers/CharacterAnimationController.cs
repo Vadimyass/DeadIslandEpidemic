@@ -2,6 +2,7 @@
 using Gameplay.Character.MovementControllers;
 using UnityEngine;
 using UnityEngine.AI;
+using static Gameplay.Character.CombatController;
 
 namespace Gameplay.Character.AnimationControllers
 {
@@ -14,7 +15,7 @@ namespace Gameplay.Character.AnimationControllers
 
         private void Update()
         {
-            if(_characterCombat.CombatState == CombatState.Melee)
+            if(_characterCombat.сombatState == CombatState.Melee)
             {
                 _animator.SetBool("IsMelee", true);
             }

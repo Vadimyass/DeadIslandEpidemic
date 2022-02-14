@@ -6,22 +6,24 @@ using UnityEngine;
 
 namespace Gameplay.Character
 {
-    public enum CombatState
-    {
-        Melee,
-        Range
-    }
+    
     public class CombatController : MonoBehaviour
     {
+        public enum CombatState
+        {
+            Melee,
+            Range
+        }
         public float AttackRange = 10;
         [SerializeField] private MovementController _movementController;
         [SerializeField] private CharacterAnimationController _animationController;
+        [SerializeField] private Shotgun _shotgun;
         private float rotateSpeedMovement = 0.075f;
         private float rotateVelocity;
         float rotationY;
         private ITargetable _target;
         private CombatState _combatState;
-        public CombatState CombatState => _combatState;
+        public CombatState сombatState => _combatState;
 
         private void Update()
         {
@@ -38,13 +40,7 @@ namespace Gameplay.Character
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Quaternion rotationToLookAt = Quaternion.LookRotation(Input.mousePosition - transform.position);
-                rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                    rotationToLookAt.eulerAngles.y,
-                    ref rotateVelocity,
-                    rotateSpeedMovement * Time.deltaTime);
-                _animationController.SetAttackState();
-                transform.eulerAngles = new Vector3(0, rotationY, 0);
+                Rotate();
                 RaycastHit hit;
                 if (_combatState == CombatState.Melee)
                 {
@@ -63,6 +59,16 @@ namespace Gameplay.Character
             }
         }
 
+        private void Rotate()
+        {
+            Quaternion rotationToLookAt = Quaternion.LookRotation(Input.mousePosition - transform.position);
+            rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
+                rotationToLookAt.eulerAngles.y,
+                ref rotateVelocity,
+                rotateSpeedMovement * Time.deltaTime);
+            _animationController.SetAttackState();
+            transform.eulerAngles = new Vector3(0, rotationY, 0);
+        }
         private void Attack()
         {
             if (_target != null)
@@ -73,6 +79,7 @@ namespace Gameplay.Character
         private void Shoot()
         {
             Debug.Log("Babah");
+            _shotgun.Shoot(transform);
         }
     }
 }
