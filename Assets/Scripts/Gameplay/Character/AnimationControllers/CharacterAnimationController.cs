@@ -10,19 +10,10 @@ namespace Gameplay.Character.AnimationControllers
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementController _characterMovement;
-        [SerializeField] private CombatController _characterCombat;
         private bool _isAttacking = false;
 
         private void Update()
         {
-            if(_characterCombat.сombatState == CombatState.Melee)
-            {
-                _animator.SetBool("IsMelee", true);
-            }
-            else
-            {
-                _animator.SetBool("IsMelee", false);
-            }
             if (_characterMovement.CharacterMovementState == CharacterMovementState.Movement)
             {
                 _animator.SetFloat("Speed",_characterMovement.SpeedMagnitude);
@@ -33,10 +24,16 @@ namespace Gameplay.Character.AnimationControllers
             }
         }
 
-        public void SetAttackState()
+        public void PlayAttackState(AttackType attackType)
         {
-            _isAttacking = true;
+            bool isMeleeAttack = attackType == AttackType.Melee;
+            _animator.SetBool("IsMelee", isMeleeAttack);
+        }
+
+        public void PlayAttackAnimation()
+        {
             _animator.SetTrigger("Attack");
+            _isAttacking = true;
         }
 
         private void OnAttackFinished()
