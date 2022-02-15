@@ -37,14 +37,14 @@ namespace Gameplay.Character
 
         public void Init(AttackType attackType)
         {
-            _rangeAttackController = new RangeAttackController();
-            _meleeAttackController = new MeleeAttackController();
+            _rangeAttackController = new RangeAttackController(_animationController);
+            _meleeAttackController = new MeleeAttackController(_animationController);
 
             _combatState = attackType;
 
             SetCharacterAttackByAttackType();
 
-            _currentAttackController.Init(attackType,_animationController);
+            _currentAttackController.Init(attackType);
         }
 
         private void Update()

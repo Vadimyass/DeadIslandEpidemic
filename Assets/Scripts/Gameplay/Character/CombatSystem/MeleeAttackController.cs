@@ -1,4 +1,5 @@
-﻿using Gameplay.Interfaces;
+﻿using Gameplay.Character.AnimationControllers;
+using Gameplay.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace Gameplay.Character.CombatSystem
     class MeleeAttackController: CharacterAttack
     {
         private ITargetable _target;
+
+        public MeleeAttackController(CharacterAnimationController animationController)
+        {
+            this._characterAnimator = animationController;
+        }
 
         public override void Shoot()
         {

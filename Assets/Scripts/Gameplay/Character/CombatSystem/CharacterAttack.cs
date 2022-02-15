@@ -1,4 +1,5 @@
 ﻿using Gameplay.Character.AnimationControllers;
+using System;
 using UnityEngine;
 using static Gameplay.Character.CombatController;
 
@@ -8,16 +9,14 @@ namespace Gameplay.Character.CombatSystem
     {
         public AttackType _attackType;
 
-        private CharacterAnimationController _characterAnimator;
+        public CharacterAnimationController _characterAnimator;
 
         public int damage;
         public int AttackRange;
 
-        public virtual void Init(AttackType attackType,CharacterAnimationController characterAnimationController)
+        public virtual void Init(AttackType attackType)
         {
             _attackType = attackType;
-
-            _characterAnimator = characterAnimationController;
 
         }
 
