@@ -17,6 +17,7 @@ namespace Gameplay.Character.CombatSystem
         public MeleeAttackController(CharacterAnimationController animationController)
         {
             this._characterAnimator = animationController;
+            _attackType = AttackType.Melee;
         }
 
         public override void Shoot()

@@ -13,16 +13,8 @@ namespace Gameplay.Character.CombatSystem
 
         public int damage;
         public int AttackRange;
-
-        public virtual void Init(AttackType attackType)
-        {
-            _attackType = attackType;
-
-        }
-
         public virtual void SetAttackState()
         {
-            Debug.LogError(_attackType.ToString());
             _characterAnimator.PlayAttackState(_attackType);
         }
 

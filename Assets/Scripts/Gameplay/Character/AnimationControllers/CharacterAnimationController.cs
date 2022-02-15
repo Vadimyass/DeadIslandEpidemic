@@ -36,8 +36,9 @@ namespace Gameplay.Character.AnimationControllers
             _isAttacking = true;
         }
 
-        private void OnAttackFinished()
+        public void OnAttackFinished()
         {
+            Debug.LogError("finished");
             _isAttacking = false;
         }
     }

@@ -10,22 +10,24 @@ namespace Gameplay.Character.CombatSystem
         private Bullet _bullet;
         private GameObject _shootStart;
 
-        public RangeAttackController(CharacterAnimationController animationController)
+        public RangeAttackController(CharacterAnimationController animationController, GameObject shootStart)
         {
             this._characterAnimator = animationController;
+            _shootStart = shootStart;
+            _attackType = AttackType.Range;
         }
 
         public override void Shoot()
         {
             base.Shoot();
             
-            var bullet = Object.Instantiate(Resources.Load<GameObject>("bullet"),
+            var bullet = Object.Instantiate(Resources.Load<Bullet>("bullet"),
                                             new Vector3(_shootStart.transform.position.x,
                                             _shootStart.transform.position.y,
                                             _shootStart.transform.position.z),
                                             _shootStart.transform.rotation);
 
-            bullet.GetComponent<Bullet>().OnStart(damage);
+            bullet.OnStart(damage);
         }
 
     }

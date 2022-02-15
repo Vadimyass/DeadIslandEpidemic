@@ -19,6 +19,7 @@ namespace Gameplay.Character
         public float AttackRange = 10;
         [SerializeField] private CharacterAnimationController _animationController;
 
+        [SerializeField] private GameObject _shootStart;
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
 
@@ -27,7 +28,7 @@ namespace Gameplay.Character
         private float rotateSpeedMovement = 0.075f;
         private float rotateVelocity;
         float rotationY;
-
+        
         private AttackType _combatState;
 
         void Start()
@@ -37,14 +38,14 @@ namespace Gameplay.Character
 
         public void Init(AttackType attackType)
         {
-            _rangeAttackController = new RangeAttackController(_animationController);
+            _rangeAttackController = new RangeAttackController(_animationController, _shootStart);
             _meleeAttackController = new MeleeAttackController(_animationController);
 
             _combatState = attackType;
 
             SetCharacterAttackByAttackType();
 
-            _currentAttackController.Init(attackType);
+            _currentAttackController.SetAttackState();
         }
 
         private void Update()
