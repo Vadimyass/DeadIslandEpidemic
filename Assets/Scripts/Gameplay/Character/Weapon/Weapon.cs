@@ -7,9 +7,4 @@ public class Weapon : MonoBehaviour
     [SerializeField] public string _name;
     [SerializeField] public int damage;
     [SerializeField] public int attackRange;
-
-    void Update()
-    {
-        
-    }
 }

@@ -8,7 +8,6 @@ namespace Gameplay.Character.CombatSystem
     public abstract class CharacterAttack
     {
         public AttackType _attackType;
-
         public CharacterAnimationController _characterAnimator;
 
         public int damage;

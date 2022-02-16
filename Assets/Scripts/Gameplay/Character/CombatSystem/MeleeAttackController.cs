@@ -15,11 +15,11 @@ namespace Gameplay.Character.CombatSystem
         private ITargetable _target;
         private MeleeWeapon _meleeWeapon;
 
-        public MeleeAttackController(CharacterAnimationController animationController, MeleeWeapon meleeWeapon)
+        public MeleeAttackController(CharacterAnimationController animationController, Weapon meleeWeapon)
         {
             this._characterAnimator = animationController;
             _attackType = AttackType.Melee;
-            _meleeWeapon = meleeWeapon;
+            _meleeWeapon = meleeWeapon as MeleeWeapon;
         }
 
         public override void Shoot()

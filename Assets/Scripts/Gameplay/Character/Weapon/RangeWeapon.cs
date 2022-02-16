@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangeWeapon : Weapon
 {
     [SerializeField] public GameObject shotStart;
-    [SerializeField] public string bulletName;
+    [SerializeField] public string BULLET_PATH;
     
     
 }

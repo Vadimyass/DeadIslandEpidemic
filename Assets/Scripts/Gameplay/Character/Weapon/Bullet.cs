@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     public void OnStart(int damage)
     {
         _damage = damage;
-        _rb.velocity = transform.forward * _speed;
+        _rb.velocity = transform.right * _speed;
     }
 
     private void OnTriggerEnter(Collider other)
