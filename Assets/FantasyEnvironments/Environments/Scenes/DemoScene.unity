@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0412\u0435\u0441\u043B\u043E"
   damage: 15
-  attackRange: 200
+  attackRange: 18
 --- !u!1001 &929449791
 PrefabInstance:
   m_ObjectHideFlags: 0

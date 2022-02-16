@@ -25,13 +25,13 @@ namespace Gameplay.Character.CombatSystem
         public override void Shoot()
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, _meleeWeapon.attackRange))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                if (hit.collider.TryGetComponent(out ITargetable target) && hit.distance <= (float)_meleeWeapon.attackRange)
                 {
-                    if (hit.collider.TryGetComponent(out ITargetable target))
-                    {
-                        _target = target;
-                    }
+                    _target = target;
                 }
+            }
 
             base.Shoot();
         }
