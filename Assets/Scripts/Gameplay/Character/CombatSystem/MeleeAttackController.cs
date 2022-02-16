@@ -13,17 +13,19 @@ namespace Gameplay.Character.CombatSystem
     class MeleeAttackController: CharacterAttack
     {
         private ITargetable _target;
+        private MeleeWeapon _meleeWeapon;
 
-        public MeleeAttackController(CharacterAnimationController animationController)
+        public MeleeAttackController(CharacterAnimationController animationController, MeleeWeapon meleeWeapon)
         {
             this._characterAnimator = animationController;
             _attackType = AttackType.Melee;
+            _meleeWeapon = meleeWeapon;
         }
 
         public override void Shoot()
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 35000))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, _meleeWeapon.attackRange))
                 {
                     if (hit.collider.TryGetComponent(out ITargetable target))
                     {
@@ -36,7 +38,7 @@ namespace Gameplay.Character.CombatSystem
 
         public void DealDamage()
         {
-            _target?.ApplyDamage(damage);
+            _target?.ApplyDamage(_meleeWeapon.damage);
         }
     }
 }

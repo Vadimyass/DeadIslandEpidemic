@@ -16,10 +16,9 @@ namespace Gameplay.Character
             Melee,
             Range
         }
-        public float AttackRange = 10;
+        [SerializeField] private MeleeWeapon _meleeWeapon;
+        [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharacterAnimationController _animationController;
-
-        [SerializeField] private GameObject _shootStart;
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
 
@@ -38,8 +37,8 @@ namespace Gameplay.Character
 
         public void Init(AttackType attackType)
         {
-            _rangeAttackController = new RangeAttackController(_animationController, _shootStart);
-            _meleeAttackController = new MeleeAttackController(_animationController);
+            _rangeAttackController = new RangeAttackController(_animationController, _rangeWeapon);
+            _meleeAttackController = new MeleeAttackController(_animationController, _meleeWeapon);
 
             _combatState = attackType;
 
@@ -80,9 +79,13 @@ namespace Gameplay.Character
             {
                 case AttackType.Melee:
                     _currentAttackController = _meleeAttackController;
+                    _rangeWeapon.gameObject.SetActive(false);
+                    _meleeWeapon.gameObject.SetActive(true);
                     break;
                 case AttackType.Range:
                     _currentAttackController =  _rangeAttackController;
+                    _rangeWeapon.gameObject.SetActive(true);
+                    _meleeWeapon.gameObject.SetActive(false);
                     break;
             }
         }
