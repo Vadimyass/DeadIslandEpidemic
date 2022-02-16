@@ -65,12 +65,16 @@ namespace Gameplay.Character
 
         private void RotateCharacaterByTheMouse()
         {
-            Quaternion rotationToLookAt = Quaternion.LookRotation(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                rotationToLookAt.eulerAngles.y,
-                ref rotateVelocity,
-                rotateSpeedMovement * Time.deltaTime);
-            transform.eulerAngles = new Vector3(0, rotationY, 0);
+            Plane playerplane = new Plane(Vector3.up, transform.position);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float hitdist;
+
+            if (playerplane.Raycast(ray, out hitdist))
+            {
+                Vector3 targetpoint = ray.GetPoint(hitdist);
+                Quaternion targetrotation = Quaternion.LookRotation(targetpoint - transform.position);
+                transform.rotation = targetrotation;
+            }
         }
 
         private void SetCharacterAttackByAttackType()
