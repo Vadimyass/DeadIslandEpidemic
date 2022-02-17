@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    
+    [SerializeField] public GameObject attackPoint;
 }

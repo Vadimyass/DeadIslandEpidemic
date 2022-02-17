@@ -9,9 +9,6 @@ namespace Gameplay.Character.CombatSystem
     {
         public AttackType _attackType;
         public CharacterAnimationController _characterAnimator;
-
-        public int damage;
-        public int AttackRange;
         public virtual void SetAttackState()
         {
             _characterAnimator.PlayAttackState(_attackType);
