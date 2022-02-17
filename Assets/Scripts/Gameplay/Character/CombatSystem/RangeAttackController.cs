@@ -23,7 +23,8 @@ namespace Gameplay.Character.CombatSystem
             var bullet = Object.Instantiate(Resources.Load<Bullet>(_rangeWeapon.BULLET_PATH),
                                             new Vector3(_rangeWeapon.shotStart.transform.position.x,
                                             _rangeWeapon.shotStart.transform.position.y,
-                                            _rangeWeapon.shotStart.transform.position.z),Quaternion.identity);
+                                            _rangeWeapon.shotStart.transform.position.z),
+                                            _rangeWeapon.shotStart.transform.rotation);
 
             bullet.OnStart(_rangeWeapon.damage);
         }
