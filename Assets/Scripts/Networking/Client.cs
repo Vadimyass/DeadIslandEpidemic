@@ -17,6 +17,9 @@ namespace Networking
         public int myId = 0;
         public TCP tcp;
 
+        public delegate void PacketHandler(Packet packet);
+        private static Dictionary<int, PacketHandler> packetHandlers;
+
         private void Awake()
         {
             if (instance == null)
@@ -36,15 +39,21 @@ namespace Networking
             ConnectToServer();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void ConnectToServer()
         {
+            InitializeClientData();
             tcp.Connect();
+        }
+
+
+        private void InitializeClientData()
+        {
+            packetHandlers = new Dictionary<int, PacketHandler>()
+                {
+                    {(int)ServerPackets.welcome,ClientHandle.Welcome }
+                };
+
+            Debug.Log("Initialized packets.");
         }
 
 
@@ -53,6 +62,7 @@ namespace Networking
             public TcpClient socket;
 
             private NetworkStream _stream;
+            private Packet _receivedData;
             private byte[] _receiveBuffer;
 
             public void Connect()
@@ -78,6 +88,8 @@ namespace Networking
                 }
 
                 _stream = socket.GetStream();
+
+                _receivedData = new Packet();
                 
                 Debug.Log($"Client connected to {socket.Client.RemoteEndPoint}");
 
@@ -95,8 +107,10 @@ namespace Networking
                         return;
                     }
     
-                    byte[] _data = new byte[_byteLength];
-                    Array.Copy(_receiveBuffer, _data, _byteLength);
+                    byte[] data = new byte[_byteLength];
+                    Array.Copy(_receiveBuffer, data, _byteLength);
+
+                    _receivedData.Reset(HandleData(data));
     
                     _stream.BeginRead(_receiveBuffer, 0, _dataBufferSize, ReceiveCallBack, null);
                 }
@@ -104,6 +118,51 @@ namespace Networking
                 {
                     Debug.Log($"Error receiving TCP data: {_ex} ");
                 }
+            }
+
+            private bool HandleData(byte[] data)
+            {
+                int packetLenght = 0;
+
+                _receivedData.SetBytes(data);
+
+                if(_receivedData.UnreadLength() >= 4)
+                {
+                    packetLenght = _receivedData.ReadInt();
+                    if(packetLenght <= 0)
+                    {
+                        return true;
+                    }
+                }
+
+                while (packetLenght > 0 && packetLenght <= _receivedData.UnreadLength())
+                {
+                    byte[] packetBytes = _receivedData.ReadBytes(packetLenght);
+                    using (Packet packet = new Packet(packetBytes))
+                    {
+                        int packetId = packet.ReadInt();
+                        packetHandlers[packetId](packet);
+                    }
+
+
+                    packetLenght = 0;
+                    if (_receivedData.UnreadLength() >= 4)
+                    {
+                        packetLenght = _receivedData.ReadInt();
+                        if (packetLenght <= 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                if(packetLenght <= 1)
+                {
+                    return true;
+                }
+
+                return false;
+
             }
         }
     }
