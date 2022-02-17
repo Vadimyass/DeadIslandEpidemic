@@ -26,7 +26,7 @@ namespace Gameplay.Character.CombatSystem
                                             _rangeWeapon.shotStart.transform.position.z),
                                             _rangeWeapon.shotStart.transform.rotation);
 
-            bullet.OnStart(_rangeWeapon.damage);
+            bullet.OnStart(_rangeWeapon.damage, _rangeWeapon.attackRange);
         }
 
     }

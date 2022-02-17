@@ -10,10 +10,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     private int _damage;
     
-    public void OnStart(int damage)
+    public void OnStart(int damage, int range)
     {
         _damage = damage;
         _rb.velocity = transform.right * _speed;
+        Destroy(gameObject, range/_speed);
     }
 
     private void OnTriggerEnter(Collider other)
