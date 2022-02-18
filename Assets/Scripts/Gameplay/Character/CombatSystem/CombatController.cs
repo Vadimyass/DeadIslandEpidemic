@@ -19,14 +19,11 @@ namespace Gameplay.Character
         [SerializeField] private MeleeWeapon _meleeWeapon;
         [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharacterAnimationController _animationController;
+        [SerializeField] private Ability _firstAbility;
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
 
         private CharacterAttack _currentAttackController;
-
-        private float rotateSpeedMovement = 0.075f;
-        private float rotateVelocity;
-        float rotationY;
         
         private AttackType _combatState;
 
@@ -60,6 +57,11 @@ namespace Gameplay.Character
             {
                 RotateCharacaterByTheMouse();
                 _currentAttackController.Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _firstAbility.OnPress();
             }
         }
 
