@@ -6,14 +6,13 @@ using UnityEngine;
 public class FirstRemySkill : Ability
 {
     [SerializeField] private int _damage;
-    [SerializeField] private MeleeWeapon _meleeWeapon;
 
     public override void OnPress()
     {
         if (!_onCooldown)
         {
             base.OnPress();
-            Collider[] hitColliders = Physics.OverlapSphere(_meleeWeapon.attackPoint.transform.position, 2f);
+            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 5);
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.gameObject.TryGetComponent(out ITargetable target))

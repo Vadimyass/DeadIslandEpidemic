@@ -13,7 +13,6 @@ public class Ability : MonoBehaviour
     {
         StartCoroutine(OnCooldown());
     }
-
     private IEnumerator OnCooldown()
     {
         Debug.Log("on Cooldown");

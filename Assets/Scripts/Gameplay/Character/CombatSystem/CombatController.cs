@@ -20,6 +20,7 @@ namespace Gameplay.Character
         [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharacterAnimationController _animationController;
         [SerializeField] private Ability _firstAbility;
+        [SerializeField] private Ability _secondAbility;
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
 
@@ -62,6 +63,11 @@ namespace Gameplay.Character
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _firstAbility.OnPress();
+            }
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _secondAbility.OnPress();
             }
         }
 

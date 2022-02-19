@@ -16,7 +16,7 @@ public class ZombieMelee : MonoBehaviour,ITargetable
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out MovementController player))
+        if (other.TryGetComponent(out HPContoller player))
         {
             player.ApplyDamage(_damage);
         }

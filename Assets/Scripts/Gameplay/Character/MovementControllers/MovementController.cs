@@ -17,9 +17,6 @@ namespace Gameplay.Character.MovementControllers
     public class MovementController : MonoBehaviour
     {
         private float _speed = 7;
-        [SerializeField] private float _maxHealth;
-        private float _currentHealth;
-        [SerializeField] private Image _healthBar;
         public float SpeedMagnitude => _playerMovement.magnitude * _speed;
         
         private Vector3 _playerMovement;
@@ -28,10 +25,7 @@ namespace Gameplay.Character.MovementControllers
         private CharacterMovementState _characterMovementState;
         public CharacterMovementState CharacterMovementState => _characterMovementState;
 
-        private void Start()
-        {
-            _currentHealth = _maxHealth;
-        }
+        
         private void Update()
         {
                 float horizontal = Input.GetAxis("Horizontal");
@@ -60,12 +54,7 @@ namespace Gameplay.Character.MovementControllers
             _characterMovementState = movementState;
         }
 
-        public void ApplyDamage(int damage)
-        {
-            _currentHealth -= damage;
-            _healthBar.fillAmount = _currentHealth / _maxHealth;
-            Debug.Log(_currentHealth);
-        }
+        
         // Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
         // float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
         //     rotationToLookAt.eulerAngles.y,
