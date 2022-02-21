@@ -95,6 +95,21 @@ namespace Networking
 
                 _stream.BeginRead(_receiveBuffer, 0, _dataBufferSize, ReceiveCallBack, null);
             }
+
+            public void SendData(Packet packet)
+            {
+                try
+                {
+                    if (socket != null)
+                    {
+                        _stream.BeginWrite(packet.ToArray(), 0, packet.Length(), null, null);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error sending data to server via TCP {e}");
+                }
+            }
             
             private void ReceiveCallBack(IAsyncResult _result)
             {

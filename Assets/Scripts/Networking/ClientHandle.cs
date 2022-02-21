@@ -16,6 +16,8 @@ namespace Networking
 
             Debug.Log($"Message from server:{message}");
             Client.instance.myId = myId;
+            
+            ClientSend.WelcomeReceived();
         }
     }
 }
