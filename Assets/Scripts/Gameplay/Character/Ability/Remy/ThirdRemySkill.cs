@@ -1,18 +1,31 @@
+using Gameplay.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThirdRemySkill : MonoBehaviour
+public class ThirdRemySkill : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int _damage;
+    [Range(0, 360)]
+    [SerializeField] private float _angle;
+    public override void OnPress()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!_onCooldown)
+        {
+            base.OnPress();
+            RotateCharacaterByTheMouse();
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
+            foreach (Collider hitCollider in hitColliders)
+            {
+                if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
+                {
+                    Vector3 dirToTarget = (hitCollider.transform.position - transform.position).normalized;
+                    if (Vector3.Angle(transform.forward, dirToTarget) < _angle / 2)
+                    {
+                        target.ApplyDamage(_damage);
+                    }
+                }
+            } 
+        }
     }
 }

@@ -15,7 +15,6 @@ public class Ability : MonoBehaviour
     }
     private IEnumerator OnCooldown()
     {
-        Debug.Log("on Cooldown");
         _onCooldown = true;
         yield return new WaitForSeconds(_cooldown);
         OnEndCooldown();
@@ -24,6 +23,18 @@ public class Ability : MonoBehaviour
     public virtual void OnEndCooldown()
     {
         _onCooldown = false;
-        Debug.Log("coolDowned");
+    }
+    public void RotateCharacaterByTheMouse()
+    {
+        Plane playerplane = new Plane(Vector3.up, transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float hitdist;
+
+        if (playerplane.Raycast(ray, out hitdist))
+        {
+            Vector3 targetpoint = ray.GetPoint(hitdist);
+            Quaternion targetrotation = Quaternion.LookRotation(targetpoint - transform.position);
+            transform.rotation = targetrotation;
+        }
     }
 }

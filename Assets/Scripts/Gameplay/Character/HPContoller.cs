@@ -19,11 +19,6 @@ public class HPContoller : MonoBehaviour
         {
             _currentHealth -= damage;
             _healthBar.fillAmount = _currentHealth / _maxHealth;
-            Debug.Log(_currentHealth);
-        }
-        else
-        {
-            Debug.Log("blocked damage");
         }
     }
 }
