@@ -34,7 +34,7 @@ namespace Gameplay.Character.CombatSystem
             {
                 if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
                 {
-                    target.ApplyDamage(_meleeWeapon.damage);
+                    target.ApplyDamage((int)_meleeWeapon.realDamage);
                     break;
                 }
             }

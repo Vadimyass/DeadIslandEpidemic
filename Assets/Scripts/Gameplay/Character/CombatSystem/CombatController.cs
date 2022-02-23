@@ -20,9 +20,13 @@ namespace Gameplay.Character
         [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharacterAnimationController _animationController;
 
+
         [SerializeField] private Ability _firstAbility;
         [SerializeField] private Ability _secondAbility;
         [SerializeField] private Ability _thirdAbility;
+        [SerializeField] private Ability _ultimateAbility;
+
+        [SerializeField] private float _attackSpeed;
 
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
@@ -34,6 +38,7 @@ namespace Gameplay.Character
         void Start()
         {
             Init(AttackType.Melee);
+            _animationController.RefreshAttackSpeed(_attackSpeed);
         }
 
         public void Init(AttackType attackType)
@@ -67,7 +72,6 @@ namespace Gameplay.Character
             {
                 _firstAbility.OnPress();
             }
-
             if(Input.GetKeyDown(KeyCode.E))
             {
                 _secondAbility.OnPress();
@@ -75,6 +79,10 @@ namespace Gameplay.Character
             if(Input.GetKeyDown(KeyCode.R))
             {
                 _thirdAbility.OnPress();
+            }
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                _ultimateAbility.OnPress();
             }
         }
 
@@ -115,12 +123,19 @@ namespace Gameplay.Character
                     _meleeWeapon.gameObject.SetActive(false);
                     break;
             }
-        }
-
-
+        }    
         public void DealDamage()
         {
             ((MeleeAttackController)_currentAttackController).DealDamage();
+        }
+        public void RefreshDamage(float damageMultiplier)
+        {
+            _firstAbility.damageMultiplier = damageMultiplier;
+            _secondAbility.damageMultiplier = damageMultiplier;
+            _thirdAbility.damageMultiplier = damageMultiplier;
+            _ultimateAbility.damageMultiplier = damageMultiplier;
+            _meleeWeapon.damageMultiplier = damageMultiplier;
+            _rangeWeapon.damageMultiplier = damageMultiplier;
         }
     }
 }

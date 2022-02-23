@@ -11,7 +11,6 @@ namespace Gameplay.Character.AnimationControllers
         [SerializeField] private Animator _animator;
         [SerializeField] private MovementController _characterMovement;
         private bool _isAttacking = false;
-
         private void Update()
         {
             if (_characterMovement.CharacterMovementState == CharacterMovementState.Movement)
@@ -39,6 +38,18 @@ namespace Gameplay.Character.AnimationControllers
         public void OnAttackFinished()
         {
             _isAttacking = false;
+        }
+
+        public void RefreshAttackSpeed(float attackSpeed)
+        {
+            float atkSpeed = attackSpeed / 100.0f;
+            _animator.SetFloat("AttackSpeed", atkSpeed);
+        }
+        public void RefreshMovementSpeed(float movementSpeed)
+        {
+            float mvmSpeed = movementSpeed / 100.0f;
+            _characterMovement.movementSpeed = mvmSpeed;
+            _animator.SetFloat("MoveSpeed", mvmSpeed);
         }
     }
 }

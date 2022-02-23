@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SecondRemySkill : Ability
 {
-    [SerializeField] private int _damage;
 
     public override void OnPress()
     {
@@ -17,7 +16,7 @@ public class SecondRemySkill : Ability
             {
                 if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
                 {
-                    target.ApplyDamage(_damage);
+                    target.ApplyDamage((int)realDamage);
                 }
             }
         }

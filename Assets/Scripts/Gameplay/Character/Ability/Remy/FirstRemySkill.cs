@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FirstRemySkill : Ability
 {
-    [SerializeField] private float _damage;
     [SerializeField] private float _chargeSpeed;
     [SerializeField] private float _maximumDistance;
     [SerializeField] private HPContoller _hp;
@@ -13,7 +12,7 @@ public class FirstRemySkill : Ability
 
     public void Start()
     {
-        _originalDamage = _damage;
+        _originalDamage = damage;
     }
     public override void OnPress()
     {
@@ -32,12 +31,12 @@ public class FirstRemySkill : Ability
         while (Vector3.Distance(transform.position, originPosition) < _maximumDistance)
         {
             damageFromDistance = 1 + (Vector3.Distance(transform.position, originPosition) / _maximumDistance);
-            _damage = _originalDamage * damageFromDistance;
+            damage = _originalDamage * damageFromDistance;
             transform.position += transform.forward * _chargeSpeed * 0.01f * (1/(damageFromDistance));
             yield return new WaitForSeconds(0.01f);
         }
         _hp.isImmune = false;
-        _damage = _originalDamage;
+        damage = _originalDamage;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -45,7 +44,7 @@ public class FirstRemySkill : Ability
         {
             if (other.TryGetComponent(out ZombieMelee zombie))
             {
-                zombie.ApplyDamage((int)_damage);
+                zombie.ApplyDamage((int)realDamage);
             }
         }
     }

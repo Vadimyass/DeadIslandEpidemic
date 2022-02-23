@@ -6064,6 +6064,7 @@ GameObject:
   - component: {fileID: 1035160363823808317}
   - component: {fileID: 1035160363823808320}
   - component: {fileID: 1035160363823808319}
+  - component: {fileID: 1035160363823808321}
   m_Layer: 0
   m_Name: Remy
   m_TagString: Untagged
@@ -6097,6 +6098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70b2bcdab54081bce858742e7545b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 1
   combat: {fileID: 1035160363823808315}
 --- !u!114 &1035160363823808315
 MonoBehaviour:
@@ -6116,6 +6118,8 @@ MonoBehaviour:
   _firstAbility: {fileID: 1035160363823808318}
   _secondAbility: {fileID: 1035160363823808317}
   _thirdAbility: {fileID: 1035160363823808320}
+  _ultimateAbility: {fileID: 1035160363823808321}
+  _attackSpeed: 100
 --- !u!136 &1035160363823808316
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6143,8 +6147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 2
+  animationController: {fileID: 0}
+  damage: 45
+  damageMultiplier: 1
   _onCooldown: 0
-  _damage: 45
 --- !u!114 &1035160363823808318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6158,8 +6164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 1
+  animationController: {fileID: 0}
+  damage: 35
+  damageMultiplier: 1
   _onCooldown: 0
-  _damage: 35
   _chargeSpeed: 150
   _maximumDistance: 15
   _hp: {fileID: 1035160363823808319}
@@ -6191,9 +6199,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 2
+  animationController: {fileID: 0}
+  damage: 55
+  damageMultiplier: 1
   _onCooldown: 0
-  _damage: 50
   _angle: 100
+--- !u!114 &1035160363823808321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035160363823808312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ce78b86bd2ff54eade62d03965e38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 2
+  animationController: {fileID: 1035160363823808313}
+  damage: 0
+  damageMultiplier: 1
+  _onCooldown: 0
+  _combatController: {fileID: 1035160363823808315}
 --- !u!4 &1052817992809374807
 Transform:
   m_ObjectHideFlags: 0

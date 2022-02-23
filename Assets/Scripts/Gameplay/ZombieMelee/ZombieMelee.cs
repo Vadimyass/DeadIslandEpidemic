@@ -12,7 +12,7 @@ public class ZombieMelee : MonoBehaviour,ITargetable
     public void ApplyDamage(int damage)
     {
         Health -= damage;
-        Debug.Log(Health);
+        Debug.Log(damage);
     }
     private void OnTriggerEnter(Collider other)
     {

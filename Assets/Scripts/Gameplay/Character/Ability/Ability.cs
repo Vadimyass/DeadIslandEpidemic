@@ -1,3 +1,4 @@
+using Gameplay.Character.AnimationControllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,12 @@ public class Ability : MonoBehaviour
 {
     private int _level;
     [SerializeField] private float _cooldown;
+    [SerializeField] public CharacterAnimationController animationController;
+
+    [SerializeField] public float damage;
+    public float damageMultiplier = 1.0f;
+    public float realDamage => damage * damageMultiplier;
+
     private int _name;
     private int _description;
     public bool _onCooldown;

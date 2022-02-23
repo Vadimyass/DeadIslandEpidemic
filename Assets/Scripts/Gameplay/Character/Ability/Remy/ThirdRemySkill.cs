@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ThirdRemySkill : Ability
 {
-    [SerializeField] private int _damage;
     [Range(0, 360)]
     [SerializeField] private float _angle;
     public override void OnPress()
@@ -22,7 +21,7 @@ public class ThirdRemySkill : Ability
                     Vector3 dirToTarget = (hitCollider.transform.position - transform.position).normalized;
                     if (Vector3.Angle(transform.forward, dirToTarget) < _angle / 2)
                     {
-                        target.ApplyDamage(_damage);
+                        target.ApplyDamage((int)realDamage);
                     }
                 }
             } 

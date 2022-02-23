@@ -17,7 +17,8 @@ namespace Gameplay.Character.MovementControllers
     public class MovementController : MonoBehaviour
     {
         private float _speed = 7;
-        public float SpeedMagnitude => _playerMovement.magnitude * _speed;
+        public float movementSpeed = 1.0f;
+        public float SpeedMagnitude => _playerMovement.magnitude * _speed * movementSpeed;
         
         private Vector3 _playerMovement;
         public CombatController combat;
@@ -53,7 +54,6 @@ namespace Gameplay.Character.MovementControllers
         {
             _characterMovementState = movementState;
         }
-
         
         // Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
         // float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
