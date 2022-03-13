@@ -2,11 +2,13 @@ using Gameplay.Character.AnimationControllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ability : MonoBehaviour
 {
+    [SerializeField] public Sprite abilityImage;
     private int _level;
-    [SerializeField] private float _cooldown;
+    [SerializeField] public float _cooldown;
     [SerializeField] public CharacterAnimationController animationController;
 
     [SerializeField] public float damage;
