@@ -21,6 +21,7 @@ namespace Gameplay.Character.AnimationControllers
             {
                 _animator.SetFloat("Speed",0);
             }
+            //Debug.LogError(_characterMovement.SpeedMagnitude);
         }
 
         public void PlayAttackState(AttackType attackType)
@@ -48,8 +49,8 @@ namespace Gameplay.Character.AnimationControllers
         public void RefreshMovementSpeed(float movementSpeed)
         {
             float mvmSpeed = movementSpeed / 100.0f;
-            _characterMovement.movementSpeed = mvmSpeed;
-            _animator.SetFloat("MoveSpeed", mvmSpeed);
+            //_characterMovement.movementSpeed = mvmSpeed;
+            //_animator.SetFloat("MoveSpeed", mvmSpeed);
         }
     }
 }

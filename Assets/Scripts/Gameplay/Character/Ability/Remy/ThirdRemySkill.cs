@@ -1,12 +1,21 @@
+using System;
 using Gameplay.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 
 public class ThirdRemySkill : Ability
 {
     [Range(0, 360)]
     [SerializeField] private float _angle;
+
+    private void Awake()
+    {
+        this.BindGameEventObserver<ThirdAbilityEvent>(OnPress);
+    }
+
     public override void OnPress()
     {
         if (!_onCooldown)

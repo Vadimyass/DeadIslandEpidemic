@@ -18,7 +18,7 @@ namespace Gameplay.Character.MovementControllers
     {
         private float _speed = 7;
         public float movementSpeed = 1.0f;
-        public float SpeedMagnitude => _playerMovement.magnitude * _speed * movementSpeed;
+        public float SpeedMagnitude => _playerMovement.magnitude * Time.deltaTime * _speed;
         
         private Vector3 _playerMovement;
         public CombatController combat;
@@ -26,28 +26,27 @@ namespace Gameplay.Character.MovementControllers
         private CharacterMovementState _characterMovementState;
         public CharacterMovementState CharacterMovementState => _characterMovementState;
 
-        
         private void Update()
         {
-                float horizontal = Input.GetAxis("Horizontal");
-                float vertical = Input.GetAxis("Vertical");
-                _playerMovement = new Vector3(horizontal, 0, vertical);
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            _playerMovement = new Vector3(horizontal, 0, vertical);
 
-                if (horizontal == 0 && vertical == 0)
-                {
-                    _characterMovementState = CharacterMovementState.Idle;
-                    return;
-                }
+            if (horizontal == 0 && vertical == 0)
+            {
+                _characterMovementState = CharacterMovementState.Idle;
+                return;
+            }
 
-                _playerMovement.Normalize();
+            _playerMovement.Normalize();
 
-                transform.Translate(_playerMovement * _speed * Time.deltaTime, Space.World);
-                if (_playerMovement != Vector3.zero)
-                {
-                    transform.forward = _playerMovement;
-                }
+            transform.Translate(_playerMovement * _speed * Time.deltaTime, Space.World);
+            if (_playerMovement != Vector3.zero)
+            {
+                transform.forward = _playerMovement;
+            }
 
-                _characterMovementState = CharacterMovementState.Movement;
+            _characterMovementState = CharacterMovementState.Movement;
         }
 
         public void SetMovementState(CharacterMovementState movementState)

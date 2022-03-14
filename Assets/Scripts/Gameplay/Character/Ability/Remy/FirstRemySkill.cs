@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 
 public class FirstRemySkill : Ability
@@ -13,6 +15,7 @@ public class FirstRemySkill : Ability
     public void Start()
     {
         _originalDamage = damage;
+        this.BindGameEventObserver<FirstAbilityEvent>(OnPress);
     }
     public override void OnPress()
     {

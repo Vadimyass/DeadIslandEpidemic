@@ -26,9 +26,4 @@ public class GameUI : MonoBehaviour
         _thirdAbilityImage.sprite = _thirdAbility.abilityImage;
         _ultimateAbilityImage.sprite = _ultimateAbility.abilityImage;
     }
-
-    void Update()
-    {
-        
-    }
 }

@@ -1,11 +1,20 @@
+using System;
 using Gameplay.Character;
 using System.Collections;
 using System.Collections.Generic;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 
 public class UltimateRemySkill : Ability
 {
     [SerializeField] private CombatController _combatController;
+
+    private void Awake()
+    {
+        this.BindGameEventObserver<UltimateAbilityEvent>(OnPress);
+    }
+
     public override void OnPress()
     {
         if (!_onCooldown)

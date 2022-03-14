@@ -1,10 +1,15 @@
+using System;
 using Gameplay.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 
 public class SecondRemySkill : Ability
 {
+    private void Awake()
+    {
+        this.BindGameEventObserver<SecondAbilityEvent>(OnPress);
+    }
 
     public override void OnPress()
     {

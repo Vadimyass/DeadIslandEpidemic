@@ -1,6 +1,7 @@
 using Gameplay.Character.AnimationControllers;
 using System.Collections;
 using System.Collections.Generic;
+using DeadIsland.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,11 @@ public class Ability : MonoBehaviour
     private int _name;
     private int _description;
     public bool _onCooldown;
+
+    public virtual void OnPress(EventBase eventBase)
+    {
+        OnPress();
+    }
     public virtual void OnPress()
     {
         StartCoroutine(OnCooldown());

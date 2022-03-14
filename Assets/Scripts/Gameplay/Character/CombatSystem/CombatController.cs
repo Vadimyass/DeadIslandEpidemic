@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
 using Gameplay.Character.AnimationControllers;
 using Gameplay.Character.CombatSystem;
 using Gameplay.Character.MovementControllers;
@@ -19,12 +21,6 @@ namespace Gameplay.Character
         [SerializeField] private MeleeWeapon _meleeWeapon;
         [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharacterAnimationController _animationController;
-
-
-        [SerializeField] private Ability _firstAbility;
-        [SerializeField] private Ability _secondAbility;
-        [SerializeField] private Ability _thirdAbility;
-        [SerializeField] private Ability _ultimateAbility;
 
         [SerializeField] private float _attackSpeed;
 
@@ -70,19 +66,19 @@ namespace Gameplay.Character
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                _firstAbility.OnPress();
+                new FirstAbilityEvent().Invoke();
             }
             if(Input.GetKeyDown(KeyCode.E))
             {
-                _secondAbility.OnPress();
+                new SecondAbilityEvent().Invoke();
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
-                _thirdAbility.OnPress();
+                new ThirdAbilityEvent().Invoke();
             }
             if(Input.GetKeyDown(KeyCode.F))
             {
-                _ultimateAbility.OnPress();
+                new UltimateAbilityEvent().Invoke();
             }
         }
 
@@ -130,10 +126,10 @@ namespace Gameplay.Character
         }
         public void RefreshDamage(float damageMultiplier)
         {
-            _firstAbility.damageMultiplier = damageMultiplier;
+            /*_firstAbility.damageMultiplier = damageMultiplier;
             _secondAbility.damageMultiplier = damageMultiplier;
             _thirdAbility.damageMultiplier = damageMultiplier;
-            _ultimateAbility.damageMultiplier = damageMultiplier;
+            _ultimateAbility.damageMultiplier = damageMultiplier;*/
             _meleeWeapon.damageMultiplier = damageMultiplier;
             _rangeWeapon.damageMultiplier = damageMultiplier;
         }
