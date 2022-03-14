@@ -26,4 +26,12 @@ public class GameUI : MonoBehaviour
         _thirdAbilityImage.sprite = _thirdAbility.abilityImage;
         _ultimateAbilityImage.sprite = _ultimateAbility.abilityImage;
     }
+
+    void Update()
+    {
+        _firstAbilityCooldownMeter.fillAmount = _firstAbility.currentCooldown / _firstAbility._cooldown;
+        _secondAbilityCooldownMeter.fillAmount = _secondAbility.currentCooldown / _secondAbility._cooldown;
+        _thirdAbilityCooldownMeter.fillAmount = _thirdAbility.currentCooldown / _thirdAbility._cooldown;
+        _ultimateAbilityCooldownMeter.fillAmount = _ultimateAbility.currentCooldown / _ultimateAbility._cooldown;
+    }
 }
