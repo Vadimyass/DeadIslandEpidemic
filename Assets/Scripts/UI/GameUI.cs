@@ -29,6 +29,9 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        
+        _firstAbilityCooldownMeter.fillAmount = _firstAbility.currentCooldown / _firstAbility._cooldown;
+        _secondAbilityCooldownMeter.fillAmount = _secondAbility.currentCooldown / _secondAbility._cooldown;
+        _thirdAbilityCooldownMeter.fillAmount = _thirdAbility.currentCooldown / _thirdAbility._cooldown;
+        _ultimateAbilityCooldownMeter.fillAmount = _ultimateAbility.currentCooldown / _ultimateAbility._cooldown;
     }
 }

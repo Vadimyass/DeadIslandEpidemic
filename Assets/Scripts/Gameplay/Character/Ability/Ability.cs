@@ -9,6 +9,7 @@ public class Ability : MonoBehaviour
     [SerializeField] public Sprite abilityImage;
     private int _level;
     [SerializeField] public float _cooldown;
+    public float currentCooldown;
     [SerializeField] public CharacterAnimationController animationController;
 
     [SerializeField] public float damage;
@@ -25,7 +26,12 @@ public class Ability : MonoBehaviour
     private IEnumerator OnCooldown()
     {
         _onCooldown = true;
-        yield return new WaitForSeconds(_cooldown);
+        currentCooldown = _cooldown;
+        while(currentCooldown > 0)
+        {
+            currentCooldown -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
         OnEndCooldown();
     }
 
