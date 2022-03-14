@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DeadIsland.Events;
+using Gameplay.Character.Ability;
 using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 

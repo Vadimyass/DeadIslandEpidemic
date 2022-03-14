@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DeadIsland.Events;
 using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
+using Gameplay.Character.Ability;
 
 public class UltimateRemySkill : Ability
 {

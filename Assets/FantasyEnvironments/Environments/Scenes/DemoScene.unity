@@ -519,7 +519,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -3264,9 +3264,9 @@ RectTransform:
   m_Father: {fileID: 1849872870}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -131, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1097021509
@@ -3603,7 +3603,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -3966,9 +3966,9 @@ RectTransform:
   m_Father: {fileID: 1849872870}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1373259536
@@ -4819,6 +4819,8 @@ GameObject:
   - component: {fileID: 1849872870}
   - component: {fileID: 1849872872}
   - component: {fileID: 1849872871}
+  - component: {fileID: 1849872873}
+  - component: {fileID: 1849872874}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -4887,6 +4889,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849872869}
   m_CullTransparentMesh: 1
+--- !u!114 &1849872873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849872869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2395c881087b3944ab65d45154554ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstAbilityImage: {fileID: 2031863148}
+  _secondAbilityImage: {fileID: 1097021510}
+  _thirdAbilityImage: {fileID: 2146066223}
+  _ultimateAbilityImage: {fileID: 1340289355}
+  _firstAbilityCooldownMeter: {fileID: 2132257740}
+  _secondAbilityCooldownMeter: {fileID: 1122129186}
+  _thirdAbilityCooldownMeter: {fileID: 129221424}
+  _ultimateAbilityCooldownMeter: {fileID: 780494766}
+  _firstAbility: {fileID: 1035160363823808318}
+  _secondAbility: {fileID: 1035160363823808317}
+  _thirdAbility: {fileID: 1035160363823808320}
+  _ultimateAbility: {fileID: 1035160363823808321}
+--- !u!114 &1849872874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849872869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1856037380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5510,9 +5562,9 @@ RectTransform:
   m_Father: {fileID: 1849872870}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -271, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2031863147
@@ -5823,7 +5875,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -5861,9 +5913,9 @@ RectTransform:
   m_Father: {fileID: 1849872870}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2146066222
@@ -6665,7 +6717,6 @@ GameObject:
   - component: {fileID: 366604051686122882}
   - component: {fileID: 6050125016723734520}
   - component: {fileID: 1035160363823808316}
-  - component: {fileID: 1035160363823808322}
   - component: {fileID: 1035160363823808315}
   - component: {fileID: 1035160363823808314}
   - component: {fileID: 1035160363823808313}
@@ -6724,10 +6775,6 @@ MonoBehaviour:
   _meleeWeapon: {fileID: 884743680}
   _rangeWeapon: {fileID: 1156133652}
   _animationController: {fileID: 1035160363823808313}
-  _firstAbility: {fileID: 1035160363823808318}
-  _secondAbility: {fileID: 1035160363823808317}
-  _thirdAbility: {fileID: 1035160363823808320}
-  _ultimateAbility: {fileID: 1035160363823808321}
   _attackSpeed: 100
 --- !u!136 &1035160363823808316
 CapsuleCollider:
@@ -6775,7 +6822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityImage: {fileID: 21300000, guid: b0d8f79b02943714e9d35b0c34b89762, type: 3}
-  _cooldown: 1
+  _cooldown: 5
   currentCooldown: 0
   animationController: {fileID: 0}
   damage: 35
@@ -6839,30 +6886,6 @@ MonoBehaviour:
   damageMultiplier: 1
   _onCooldown: 0
   _combatController: {fileID: 1035160363823808315}
---- !u!114 &1035160363823808322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035160363823808312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2395c881087b3944ab65d45154554ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _firstAbilityImage: {fileID: 2031863148}
-  _secondAbilityImage: {fileID: 1097021510}
-  _thirdAbilityImage: {fileID: 2146066223}
-  _ultimateAbilityImage: {fileID: 1340289355}
-  _firstAbilityCooldownMeter: {fileID: 2132257740}
-  _secondAbilityCooldownMeter: {fileID: 1122129186}
-  _thirdAbilityCooldownMeter: {fileID: 129221424}
-  _ultimateAbilityCooldownMeter: {fileID: 780494766}
-  _firstAbility: {fileID: 1035160363823808318}
-  _secondAbility: {fileID: 1035160363823808317}
-  _thirdAbility: {fileID: 1035160363823808320}
-  _ultimateAbility: {fileID: 1035160363823808321}
 --- !u!4 &1052817992809374807
 Transform:
   m_ObjectHideFlags: 0

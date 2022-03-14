@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DeadIsland.Events;
+using Gameplay.Character.Ability.AbilityEvents;
+using Gameplay.Character.Ability;
 
 public class GameUI : MonoBehaviour
 {
@@ -15,23 +18,32 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image _thirdAbilityCooldownMeter;
     [SerializeField] private Image _ultimateAbilityCooldownMeter;
 
-    [SerializeField] private Ability _firstAbility;
-    [SerializeField] private Ability _secondAbility;
-    [SerializeField] private Ability _thirdAbility;
-    [SerializeField] private Ability _ultimateAbility;
+    [SerializeField] private FirstRemySkill _firstAbility;
+    [SerializeField] private SecondRemySkill _secondAbility;
+    [SerializeField] private ThirdRemySkill _thirdAbility;
+    [SerializeField] private UltimateRemySkill _ultimateAbility;
     void Start()
     {
+        this.BindGameEventObserver<FirstAbilityEvent>((eventBase) => StartCooldown(_firstAbilityCooldownMeter, _firstAbility));
+        this.BindGameEventObserver<SecondAbilityEvent>((eventBase) => StartCooldown(_secondAbilityCooldownMeter, _secondAbility));
+        this.BindGameEventObserver<ThirdAbilityEvent>((eventBase) => StartCooldown(_thirdAbilityCooldownMeter, _thirdAbility));
+        this.BindGameEventObserver<UltimateAbilityEvent>((eventBase) => StartCooldown(_ultimateAbilityCooldownMeter, _ultimateAbility));
         _firstAbilityImage.sprite = _firstAbility.abilityImage;
         _secondAbilityImage.sprite = _secondAbility.abilityImage;
         _thirdAbilityImage.sprite = _thirdAbility.abilityImage;
         _ultimateAbilityImage.sprite = _ultimateAbility.abilityImage;
     }
-
-    void Update()
+    public virtual void StartCooldown(Image abilityCooldownMeter, Ability ability)
     {
-        _firstAbilityCooldownMeter.fillAmount = _firstAbility.currentCooldown / _firstAbility._cooldown;
-        _secondAbilityCooldownMeter.fillAmount = _secondAbility.currentCooldown / _secondAbility._cooldown;
-        _thirdAbilityCooldownMeter.fillAmount = _thirdAbility.currentCooldown / _thirdAbility._cooldown;
-        _ultimateAbilityCooldownMeter.fillAmount = _ultimateAbility.currentCooldown / _ultimateAbility._cooldown;
+        StartCoroutine(CooldownSkill(abilityCooldownMeter, ability));
+    }
+    private IEnumerator CooldownSkill(Image abilityCooldownMeter, Ability ability)
+    {
+        yield return new WaitForEndOfFrame();
+        while (ability._onCooldown)
+        {
+            abilityCooldownMeter.fillAmount = ability.currentCooldown/ability._cooldown;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
