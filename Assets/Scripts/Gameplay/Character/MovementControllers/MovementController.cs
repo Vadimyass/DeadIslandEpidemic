@@ -18,7 +18,7 @@ namespace Gameplay.Character.MovementControllers
     {
         private float _speed = 7;
         public float movementSpeed = 1.0f;
-        public float SpeedMagnitude => _playerMovement.magnitude * Time.deltaTime * _speed;
+        public float SpeedMagnitude => _playerMovement.magnitude;
         
         private Vector3 _playerMovement;
         public CombatController combat;
@@ -30,23 +30,12 @@ namespace Gameplay.Character.MovementControllers
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+            
             _playerMovement = new Vector3(horizontal, 0, vertical);
-
-            if (horizontal == 0 && vertical == 0)
-            {
-                _characterMovementState = CharacterMovementState.Idle;
-                return;
-            }
-
+            
             _playerMovement.Normalize();
-
             transform.Translate(_playerMovement * _speed * Time.deltaTime, Space.World);
-            if (_playerMovement != Vector3.zero)
-            {
-                transform.forward = _playerMovement;
-            }
-
-            _characterMovementState = CharacterMovementState.Movement;
+            transform.forward =  _playerMovement != Vector3.zero ? _playerMovement : transform.forward;
         }
 
         public void SetMovementState(CharacterMovementState movementState)
