@@ -13,6 +13,16 @@ public class FirstRemySkill : Ability
     private Vector3 originPosition;
     private float _originalDamage;
 
+    public override void UpLevel()
+    {
+        base.UpLevel();
+        _originalDamage *= 1.2f;
+        _cooldown -= 1;
+        if (level == 4)
+        {
+            _chargeSpeed *= 2;  
+        }
+    }
     public void Start()
     {
         _originalDamage = damage;
@@ -20,7 +30,7 @@ public class FirstRemySkill : Ability
     }
     public override void OnPress()
     {
-        if (!_onCooldown)
+        if (!_onCooldown && level!=0)
         {
             base.OnPress();
             originPosition = transform.position;

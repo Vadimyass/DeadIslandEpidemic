@@ -16,10 +16,18 @@ public class ThirdRemySkill : Ability
     {
         this.BindGameEventObserver<ThirdAbilityEvent>(OnPress);
     }
-
+    public override void UpLevel()
+    {
+        base.UpLevel();
+        damage *= 1.2f;
+        if (level == 4)
+        {
+            _angle += 20;
+        }
+    }
     public override void OnPress()
     {
-        if (!_onCooldown)
+        if (!_onCooldown && level != 0)
         {
             base.OnPress();
             RotateCharacaterByTheMouse();

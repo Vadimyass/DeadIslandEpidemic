@@ -23,6 +23,13 @@ namespace Gameplay.Character.Ability
         private int _description;
         public bool _onCooldown;
 
+        public int level;
+        public int maxLevel;
+
+        public virtual void UpLevel()
+        {
+            level++;
+        }
         public virtual void OnPress(EventBase eventBase)
         {
             OnPress();
