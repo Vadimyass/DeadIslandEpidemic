@@ -9,7 +9,7 @@ public class ZombieMelee : MonoBehaviour,ITargetable
 {
     public int Health;
     [SerializeField] private int _damage;
-    private int _xpFromDeath = 5000;
+    private int _xpFromDeath = 200;
     public void ApplyDamage(int damage)
     {
         Health -= damage;

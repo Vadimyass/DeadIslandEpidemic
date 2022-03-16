@@ -9,12 +9,12 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     public int xp = 0;
-    public int level = 0;
+    public int level = 1;
     [SerializeField] public int[] needXP = new int[10];
     public int upgradePoints;
     [SerializeField] private AbilityContainer _abilities;
 
-    void Start()
+    void Awake()
     {
         this.BindGameEventObserver<UpLevelEvent>(UpLevel);
         this.BindGameEventObserver<FirstAbilityUpgradeEvent>((eventBase) => UpgradeAbility(_abilities.firstAbility));
@@ -25,12 +25,9 @@ public class LevelController : MonoBehaviour
     public void TakeXP(int addedXP)
     {
         xp += addedXP;
-        while (xp > needXP[level])
+        while (xp > needXP[level-1])
         {
-            if (xp > needXP[level])
-            {
-                new UpLevelEvent().Invoke();
-            }
+            new UpLevelEvent().Invoke();
         }
     }
     public void UpLevel(EventBase eventBase)

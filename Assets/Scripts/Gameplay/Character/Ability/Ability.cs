@@ -26,6 +26,8 @@ namespace Gameplay.Character.Ability
         public int level;
         public int maxLevel;
 
+        public int[] minLvlForUpgrade = new int[4];
+
         public virtual void UpLevel()
         {
             level++;

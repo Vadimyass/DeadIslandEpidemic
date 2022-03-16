@@ -52,7 +52,7 @@ public class GameUI : MonoBehaviour
         this.BindGameEventObserver<SecondAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_secondAbilityLevel, _abilities.secondAbility));
         this.BindGameEventObserver<ThirdAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_thirdAbilityLevel, _abilities.thirdAbility));
         this.BindGameEventObserver<UltimateAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_ultimateAbilityLevel, _abilities.ultimateAbility));
-
+        CheckForUpgradingPosibility();
         _firstAbilityImage.sprite = _abilities.firstAbility.abilityImage;
         _secondAbilityImage.sprite = _abilities.secondAbility.abilityImage;
         _thirdAbilityImage.sprite = _abilities.thirdAbility.abilityImage;
@@ -76,27 +76,41 @@ public class GameUI : MonoBehaviour
     }
     private void UpPlayerLevel(EventBase eventBase)
     {
-        _level.text = (_levelController.level+1).ToString();
-        _firstAbilityUpgrade.gameObject.SetActive(true);
-        _secondAbilityUpgrade.gameObject.SetActive(true);
-        _thirdAbilityUpgrade.gameObject.SetActive(true);
-        _ultimateAbilityUpgrade.gameObject.SetActive(true);
+        new WaitForFixedUpdate();
+        _level.text = (_levelController.level).ToString();
+        CheckForUpgradingPosibility();
     }
 
-    private void UpAbilityLevel(Image abilityLevel, Ability ability)
+    private void CheckForUpgradingPosibility()
     {
-        abilityLevel.fillAmount = (float)ability.level / (float)ability.maxLevel;
-        if(_levelController.upgradePoints == 0)
+        _firstAbilityUpgrade.gameObject.SetActive(CanBeUpgraded(_abilities.firstAbility));
+        _secondAbilityUpgrade.gameObject.SetActive(CanBeUpgraded(_abilities.secondAbility));
+        _thirdAbilityUpgrade.gameObject.SetActive(CanBeUpgraded(_abilities.thirdAbility));
+        _ultimateAbilityUpgrade.gameObject.SetActive(CanBeUpgraded(_abilities.ultimateAbility));
+    }
+    private bool CanBeUpgraded(Ability ability)
+    {
+        if(ability.level == ability.maxLevel)
         {
-            _firstAbilityUpgrade.gameObject.SetActive(false);
-            _secondAbilityUpgrade.gameObject.SetActive(false);
-            _thirdAbilityUpgrade.gameObject.SetActive(false);
-            _ultimateAbilityUpgrade.gameObject.SetActive(false);
+            return false;
         }
+        else if (_levelController.level >= ability.minLvlForUpgrade[ability.level] && _levelController.upgradePoints > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void UpAbilityLevel(Image abilityLevel, Ability ability)
+    {
+        new WaitForFixedUpdate();
+        abilityLevel.fillAmount = (float)ability.level / (float)ability.maxLevel;
+        CheckForUpgradingPosibility();
     }
 
     public void TriggerUpAbilityLevelEvent(int skillNumber)
     {
+        Debug.Log("Clicked");
         if(skillNumber == 1)
         {
             new FirstAbilityUpgradeEvent().Invoke();
