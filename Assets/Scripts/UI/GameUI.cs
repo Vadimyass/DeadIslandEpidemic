@@ -58,7 +58,7 @@ public class GameUI : MonoBehaviour
         _thirdAbilityImage.sprite = _abilities.thirdAbility.abilityImage;
         _ultimateAbilityImage.sprite = _abilities.ultimateAbility.abilityImage;
     }
-    public virtual void StartCooldown(Image abilityCooldownMeter, Ability ability, TextMeshProUGUI abilityCooldown)
+    public void StartCooldown(Image abilityCooldownMeter, Ability ability, TextMeshProUGUI abilityCooldown)
     {
         StartCoroutine(CooldownSkill(abilityCooldownMeter, ability, abilityCooldown));
     }
@@ -110,7 +110,6 @@ public class GameUI : MonoBehaviour
 
     public void TriggerUpAbilityLevelEvent(int skillNumber)
     {
-        Debug.Log("Clicked");
         if(skillNumber == 1)
         {
             new FirstAbilityUpgradeEvent().Invoke();
