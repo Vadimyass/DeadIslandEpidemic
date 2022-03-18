@@ -30,7 +30,10 @@ namespace Gameplay.Character.Ability
 
         public virtual void UpLevel()
         {
-            level++;
+            if (level < maxLevel)
+            {
+                level++;
+            }
         }
         public virtual void OnPress(EventBase eventBase)
         {

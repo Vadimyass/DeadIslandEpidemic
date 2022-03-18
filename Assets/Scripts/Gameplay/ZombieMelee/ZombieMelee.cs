@@ -4,6 +4,7 @@ using Gameplay.Character.MovementControllers;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
+using Gameplay.Character.Leveling;
 
 public class ZombieMelee : MonoBehaviour,ITargetable
 {
@@ -33,7 +34,7 @@ public class ZombieMelee : MonoBehaviour,ITargetable
         Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 5);
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.TryGetComponent(out LevelController player))
+            if (hitCollider.gameObject.TryGetComponent(out HeroLeveling player))
             {
                 player.TakeXP(_xpFromDeath);
             }

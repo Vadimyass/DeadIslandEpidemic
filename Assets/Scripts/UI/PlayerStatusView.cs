@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using DeadIsland.Events;
 using Gameplay.Character.Ability.AbilityEvents;
 using Gameplay.Character.Ability;
-using Gameplay.Character;
+using Gameplay.Character.Leveling;
+using Gameplay.Character.Leveling.Events;
 using TMPro;
 using Gameplay.Character.Ability.UpgradeEvents;
 
-public class GameUI : MonoBehaviour
+public class PlayerStatusView : MonoBehaviour
 {
     [SerializeField] private Image _firstAbilityImage;
     [SerializeField] private Image _secondAbilityImage;
@@ -40,23 +41,44 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] private Image _xpMeter;
     [SerializeField] private TextMeshProUGUI _level;
-    [SerializeField] private LevelController _levelController;
+    [SerializeField] private HeroLeveling _heroLeveling;
+
+    [SerializeField] private Button testButton;
     void Start()
     {
+        //Бинд ивента на повышение лвла игрока
+        this.BindGameEventObserver<UpLevelEvent>(UpPlayerLevel);
+
+        //Бинд ивентов на нажимание абилок
         this.BindGameEventObserver<FirstAbilityEvent>((eventBase) => StartCooldown(_firstAbilityCooldownMeter, _abilities.firstAbility, _firstAbilityCooldown));
         this.BindGameEventObserver<SecondAbilityEvent>((eventBase) => StartCooldown(_secondAbilityCooldownMeter, _abilities.secondAbility, _secondAbilityCooldown));
         this.BindGameEventObserver<ThirdAbilityEvent>((eventBase) => StartCooldown(_thirdAbilityCooldownMeter, _abilities.thirdAbility, _thirdAbilityCooldown));
         this.BindGameEventObserver<UltimateAbilityEvent>((eventBase) => StartCooldown(_ultimateAbilityCooldownMeter, _abilities.ultimateAbility, _ultimateAbilityCooldown));
-        this.BindGameEventObserver<UpLevelEvent>(UpPlayerLevel);
+
+        //Бинд ивентов на прокачку абилок
         this.BindGameEventObserver<FirstAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_firstAbilityLevel, _abilities.firstAbility));
         this.BindGameEventObserver<SecondAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_secondAbilityLevel, _abilities.secondAbility));
         this.BindGameEventObserver<ThirdAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_thirdAbilityLevel, _abilities.thirdAbility));
         this.BindGameEventObserver<UltimateAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_ultimateAbilityLevel, _abilities.ultimateAbility));
+
+        //Чекаем могут ли апгрейдиться скилы
         CheckForUpgradingPosibility();
+
+        //Привязываем кнопки к ивентам прокачки абилок
+        _firstAbilityUpgrade.onClick.AddListener(() => { new FirstAbilityUpgradeEvent().Invoke();});
+        _secondAbilityUpgrade.onClick.AddListener(() => { new SecondAbilityUpgradeEvent().Invoke(); });
+        _thirdAbilityUpgrade.onClick.AddListener(() => { new ThirdAbilityUpgradeEvent().Invoke(); });
+        _ultimateAbilityUpgrade.onClick.AddListener(() => { new UltimateAbilityUpgradeEvent().Invoke(); });
+
+        this.BindGameEventObserver<TakeXpEvent>(TakeXP);
+
         _firstAbilityImage.sprite = _abilities.firstAbility.abilityImage;
         _secondAbilityImage.sprite = _abilities.secondAbility.abilityImage;
         _thirdAbilityImage.sprite = _abilities.thirdAbility.abilityImage;
         _ultimateAbilityImage.sprite = _abilities.ultimateAbility.abilityImage;
+
+        //ДЛЯ ТЕСТИРОВАНИЯ
+        testButton.onClick.AddListener(() => { _heroLeveling.TakeXP(200); });
     }
     public void StartCooldown(Image abilityCooldownMeter, Ability ability, TextMeshProUGUI abilityCooldown)
     {
@@ -77,7 +99,7 @@ public class GameUI : MonoBehaviour
     private void UpPlayerLevel(EventBase eventBase)
     {
         new WaitForFixedUpdate();
-        _level.text = (_levelController.level).ToString();
+        _level.text = (_heroLeveling.level).ToString();
         CheckForUpgradingPosibility();
     }
 
@@ -94,7 +116,7 @@ public class GameUI : MonoBehaviour
         {
             return false;
         }
-        else if (_levelController.level >= ability.minLvlForUpgrade[ability.level] && _levelController.upgradePoints > 0)
+        else if (_heroLeveling.level >= ability.minLvlForUpgrade[ability.level] && _heroLeveling.upgradePoints > 0)
         {
             return true;
         }
@@ -103,29 +125,17 @@ public class GameUI : MonoBehaviour
 
     public void UpAbilityLevel(Image abilityLevel, Ability ability)
     {
-        new WaitForFixedUpdate();
-        abilityLevel.fillAmount = (float)ability.level / (float)ability.maxLevel;
-        CheckForUpgradingPosibility();
-
+        if (ability.level < ability.maxLevel)
+        {
+            new WaitForFixedUpdate();
+            abilityLevel.fillAmount = (float)ability.level / (float)ability.maxLevel;
+            CheckForUpgradingPosibility();
+        }
     }
 
-    public void TriggerUpAbilityLevelEvent(int skillNumber)
+    private void TakeXP(EventBase eventBase)
     {
-        if(skillNumber == 1)
-        {
-            new FirstAbilityUpgradeEvent().Invoke();
-        }
-        else if(skillNumber == 2)
-        {
-            new SecondAbilityUpgradeEvent().Invoke();
-        }
-        else if(skillNumber == 3)
-        {
-            new ThirdAbilityUpgradeEvent().Invoke();
-        }
-        else if(skillNumber == 4)
-        {
-            new UltimateAbilityUpgradeEvent().Invoke();
-        }
+        new WaitForFixedUpdate();
+        _xpMeter.fillAmount = (float)(_heroLeveling.xp - _heroLeveling.needXP[_heroLeveling.level-2]) / (float)(_heroLeveling.needXP[_heroLeveling.level-1] - _heroLeveling.needXP[_heroLeveling.level - 2]);
     }
 }
