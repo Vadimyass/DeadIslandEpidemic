@@ -12,7 +12,7 @@ public class Client : MonoBehaviour
 
     public string ip = "127.0.0.1";
     public int port = 26950;
-    public int myId = 0;
+    public int myId = 2;
     public TCP tcp;
     public UDP udp;
 
@@ -152,11 +152,14 @@ public class Client : MonoBehaviour
             {
                 // While packet contains data AND packet data length doesn't exceed the length of the packet we're reading
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
-                using (Packet _packet = new Packet(_packetBytes))
+                ThreadManager.ExecuteOnMainThread(() =>
                 {
-                    int _packetId = _packet.ReadInt();
-                    packetHandlers[_packetId](_packet); // Call appropriate method to handle the packet
-                }
+                    using (Packet _packet = new Packet(_packetBytes))
+                    {
+                        int _packetId = _packet.ReadInt();
+                        packetHandlers[_packetId](_packet); // Call appropriate method to handle the packet
+                    }
+                });
 
                 _packetLength = 0; // Reset packet length
                 if (receivedData.UnreadLength() >= 4)
@@ -266,11 +269,14 @@ public class Client : MonoBehaviour
                 _data = _packet.ReadBytes(_packetLength);
             }
 
-            using (Packet _packet = new Packet(_data))
+            ThreadManager.ExecuteOnMainThread(() =>
             {
-                int _packetId = _packet.ReadInt();
-                packetHandlers[_packetId](_packet); // Call appropriate method to handle the packet
-            }
+                using (Packet _packet = new Packet(_data))
+                {
+                    int _packetId = _packet.ReadInt();
+                    packetHandlers[_packetId](_packet); // Call appropriate method to handle the packet
+                }
+            });
         }
 
         /// <summary>Disconnects from the server and cleans up the UDP connection.</summary>
@@ -293,14 +299,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
-            { (int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
-            { (int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned },
             { (int)ServerPackets.createItemSpawner, ClientHandle.CreateItemSpawner },
             { (int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned },
-            { (int)ServerPackets.itemPickedUp, ClientHandle.ItemPickedUp },
-            { (int)ServerPackets.spawnProjectile, ClientHandle.SpawnProjectile },
-            { (int)ServerPackets.projectilePosition, ClientHandle.ProjectilePosition },
-            { (int)ServerPackets.projectileExploded, ClientHandle.ProjectileExploded },
             { (int)ServerPackets.spawnEnemy, ClientHandle.SpawnEnemy },
             { (int)ServerPackets.enemyPosition, ClientHandle.EnemyPosition },
             { (int)ServerPackets.enemyHealth, ClientHandle.EnemyHealth },

@@ -1,30 +1,14 @@
-﻿using System;
-using System.Numerics;
-using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Events;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Gameplay.Character.MovementControllers
 {
-    public enum CharacterMovementState
-    {
-        Idle,
-        Movement,
-        Attack
-    }
     public class MovementController : MonoBehaviour
     {
         private float _speed = 7;
-        public float movementSpeed = 1.0f;
         public float SpeedMagnitude => _playerMovement.magnitude;
         
         private Vector3 _playerMovement;
-        public CombatController combat;
-
-        private CharacterMovementState _characterMovementState;
-        public CharacterMovementState CharacterMovementState => _characterMovementState;
 
         private void Update()
         {
@@ -35,20 +19,8 @@ namespace Gameplay.Character.MovementControllers
             
             _playerMovement.Normalize();
             transform.Translate(_playerMovement * _speed * Time.deltaTime, Space.World);
+            ClientSend.PlayerMovement(transform.position);
             transform.forward =  _playerMovement != Vector3.zero ? _playerMovement : transform.forward;
         }
-
-        public void SetMovementState(CharacterMovementState movementState)
-        {
-            _characterMovementState = movementState;
-        }
-        
-        // Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-        // float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-        //     rotationToLookAt.eulerAngles.y,
-        //     ref rotateVelocity,
-        //     rotateSpeedMovement * Time.deltaTime);
-        //
-        // transform.eulerAngles = new Vector3(0, rotationY, 0);
     }
 }
