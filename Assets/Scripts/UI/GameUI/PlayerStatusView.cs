@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DeadIsland.Events;
-using Gameplay.Character.Ability.AbilityEvents;
-using Gameplay.Character.Ability;
+using Gameplay.Character.Abilities.AbilityEvents;
+using Gameplay.Character.Abilities;
 using Gameplay.Character.Leveling;
 using Gameplay.Character.Leveling.Events;
 using TMPro;
-using Gameplay.Character.Ability.UpgradeEvents;
+using Gameplay.Character.Abilities.UpgradeEvents;
 
 namespace UI.GameUI
 {
     public class PlayerStatusView : MonoBehaviour
     {
+        private HeroLeveling _heroLeveling;
+        private AbilityContainer _abilities;
+
+
         [SerializeField] private Image _firstAbilityImage;
         [SerializeField] private Image _secondAbilityImage;
         [SerializeField] private Image _thirdAbilityImage;
@@ -23,8 +27,6 @@ namespace UI.GameUI
         [SerializeField] private Image _secondAbilityCooldownMeter;
         [SerializeField] private Image _thirdAbilityCooldownMeter;
         [SerializeField] private Image _ultimateAbilityCooldownMeter;
-
-        [SerializeField] private AbilityContainer _abilities;
 
         [SerializeField] private TextMeshProUGUI _firstAbilityCooldown;
         [SerializeField] private TextMeshProUGUI _secondAbilityCooldown;
@@ -43,9 +45,14 @@ namespace UI.GameUI
 
         [SerializeField] private Image _xpMeter;
         [SerializeField] private TextMeshProUGUI _level;
-        [SerializeField] private HeroLeveling _heroLeveling;
-
+        
         [SerializeField] private Button testButton;
+
+        public void SetParams(HeroLeveling heroLeveling, AbilityContainer abilityContainer)
+        {
+            _abilities = abilityContainer;
+            _heroLeveling = heroLeveling;
+        }
         void Start()
         {
             //Бинд ивента на повышение лвла игрока

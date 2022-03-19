@@ -9,10 +9,15 @@ namespace Gameplay.Character.AnimationControllers
 {
     public class CharacterAnimationController : MonoBehaviour
     {
-        [SerializeField] private Animator _animator;
-        [SerializeField] private MovementController _characterMovement;
+        private Animator _animator;
+        private MovementController _characterMovement;
         private bool _isAttacking = false;
-        
+
+        public void SetParams(Animator animator, MovementController movementController)
+        {
+            _animator = animator;
+            _characterMovement = movementController;
+        }
         private void Update()
         {
             _animator.SetFloat("Speed",_characterMovement.SpeedMagnitude);

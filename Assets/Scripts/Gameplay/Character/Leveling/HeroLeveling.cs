@@ -1,7 +1,7 @@
 using DeadIsland.Events;
 using Gameplay.Character.Leveling.Events;
-using Gameplay.Character.Ability;
-using Gameplay.Character.Ability.UpgradeEvents;
+using Gameplay.Character.Abilities;
+using Gameplay.Character.Abilities.UpgradeEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +15,12 @@ namespace Gameplay.Character.Leveling
         private int _maxLevel = 20;
         [SerializeField] public int[] needXP = new int[10];
         public int upgradePoints;
-        [SerializeField] private AbilityContainer _abilities;
+        private AbilityContainer _abilities;
 
+        public void SetParams(AbilityContainer abilityContainer)
+        {
+            _abilities = abilityContainer;
+        }
         void Awake()
         {
             this.BindGameEventObserver<UpLevelEvent>(UpLevel);
@@ -43,7 +47,7 @@ namespace Gameplay.Character.Leveling
             upgradePoints++;
         }
 
-        public void UpgradeAbility(Ability.Ability ability)
+        public void UpgradeAbility(Ability ability)
         {
             if (upgradePoints != 0)
             {

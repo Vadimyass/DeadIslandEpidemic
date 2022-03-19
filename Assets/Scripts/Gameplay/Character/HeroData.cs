@@ -7,8 +7,14 @@ namespace Gameplay.Character
     {
         public string heroName;
 
+        public float damageAmplification;
+        public float attackSpeed;
+
         public string meleeWeaponName;
+        public float meleeWeaponModificator;
+
         public string rangeWeaponName;
+        public float rangeWeaponModificator;
 
         public string firstAbilityName;
         public string secondAbilityName;

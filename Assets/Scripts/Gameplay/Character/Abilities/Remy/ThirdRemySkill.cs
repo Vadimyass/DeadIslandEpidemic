@@ -3,11 +3,11 @@ using Gameplay.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using DeadIsland.Events;
-using Gameplay.Character.Ability.AbilityEvents;
+using Gameplay.Character.Abilities.AbilityEvents;
 using UnityEngine;
-using Gameplay.Character.Ability;
+using Gameplay.Character.Abilities;
 
-namespace Gameplay.Character.Ability.Remy
+namespace Gameplay.Character.Abilities.Remy
 {
     public class ThirdRemySkill : Ability
     {

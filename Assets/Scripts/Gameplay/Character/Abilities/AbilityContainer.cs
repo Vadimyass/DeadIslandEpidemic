@@ -1,15 +1,22 @@
-using Gameplay.Character.Ability;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Ability
+namespace Gameplay.Character.Abilities
 {
     public class AbilityContainer : MonoBehaviour
     {
-        [SerializeField] public Ability firstAbility;
-        [SerializeField] public Ability secondAbility;
-        [SerializeField] public Ability thirdAbility;
-        [SerializeField] public Ability ultimateAbility;
+        public Ability firstAbility;
+        public Ability secondAbility;
+        public Ability thirdAbility;
+        public Ability ultimateAbility;
+
+        public void SetParams(Ability _firstAbility, Ability _secondAbility, Ability _thirdAbility, Ability _ultimateAbility)
+        {
+            firstAbility = _firstAbility;
+            secondAbility = _secondAbility;
+            thirdAbility = _thirdAbility;
+            ultimateAbility = _ultimateAbility;
+        }
     }
 }

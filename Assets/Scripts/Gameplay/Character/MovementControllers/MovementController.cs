@@ -16,16 +16,20 @@ namespace Gameplay.Character.MovementControllers
     }
     public class MovementController : MonoBehaviour
     {
-        private float _speed = 7;
+        private float _speed;
         public float movementSpeed = 1.0f;
         public float SpeedMagnitude => _playerMovement.magnitude;
         
         private Vector3 _playerMovement;
-        public CombatController combat;
 
         private CharacterMovementState _characterMovementState;
         public CharacterMovementState CharacterMovementState => _characterMovementState;
 
+
+        public void SetParams(float moveSpeed)
+        {
+            _speed = moveSpeed;
+        }
         private void Update()
         {
             float horizontal = Input.GetAxis("Horizontal");

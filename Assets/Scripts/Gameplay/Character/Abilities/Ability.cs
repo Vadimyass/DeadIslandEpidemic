@@ -5,7 +5,7 @@ using DeadIsland.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gameplay.Character.Ability
+namespace Gameplay.Character.Abilities
 {
     public class Ability : MonoBehaviour
     {

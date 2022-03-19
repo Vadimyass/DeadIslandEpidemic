@@ -10,11 +10,17 @@ namespace Gameplay.Character
 {
     public class Health : MonoBehaviour, ITargetable
     {
-        [SerializeField] private float _maxHealth;
+        private float _maxHealth;
         private float _currentHealth;
-        [SerializeField] private CharactersStatusView _characterStatus;
+        private CharactersStatusView _characterStatus;
         public bool isImmune = false;
         private int _xpFromDeath = 200;
+
+        public void SetParams(float health, CharactersStatusView characterStatus)
+        {
+            _maxHealth = health;
+            _characterStatus = characterStatus;
+        }
         private void Start()
         {
             _currentHealth = _maxHealth;
