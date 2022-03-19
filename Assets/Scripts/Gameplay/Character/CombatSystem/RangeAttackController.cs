@@ -1,5 +1,6 @@
 ﻿
 using Gameplay.Character.AnimationControllers;
+using Gameplay.Character.Weapons;
 using UnityEngine;
 using static Gameplay.Character.CombatController;
 
@@ -11,9 +12,9 @@ namespace Gameplay.Character.CombatSystem
 
         public RangeAttackController(CharacterAnimationController animationController, Weapon rangeWeapon)
         {
-            this._characterAnimator = animationController;
+            this.characterAnimator = animationController;
             _rangeWeapon = rangeWeapon as RangeWeapon;
-            _attackType = AttackType.Range;
+            attackType = AttackType.Range;
         }
 
         public override void Shoot()

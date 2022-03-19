@@ -12,7 +12,7 @@ namespace Gameplay.Character.Leveling
     {
         public int xp = 0;
         public int level = 1;
-        private int maxLevel = 20;
+        private int _maxLevel = 20;
         [SerializeField] public int[] needXP = new int[10];
         public int upgradePoints;
         [SerializeField] private AbilityContainer _abilities;
@@ -27,7 +27,7 @@ namespace Gameplay.Character.Leveling
         }
         public void TakeXP(int addedXP)
         {
-            if (level < maxLevel)
+            if (level < _maxLevel)
             {
                 xp += addedXP;
                 while (xp >= needXP[level - 1])

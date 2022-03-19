@@ -5,6 +5,7 @@ using Gameplay.Character.Ability.AbilityEvents;
 using Gameplay.Character.AnimationControllers;
 using Gameplay.Character.CombatSystem;
 using Gameplay.Character.MovementControllers;
+using Gameplay.Character.Weapons;
 using Gameplay.Interfaces;
 using UnityEngine;
 

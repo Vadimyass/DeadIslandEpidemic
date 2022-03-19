@@ -10,8 +10,7 @@ namespace Gameplay.Character.Ability
     public class Ability : MonoBehaviour
     {
         [SerializeField] public Sprite abilityImage;
-        private int _level;
-        [SerializeField] public float _cooldown;
+        [SerializeField] public float cooldown;
         public float currentCooldown;
         [SerializeField] public CharacterAnimationController animationController;
 
@@ -19,9 +18,9 @@ namespace Gameplay.Character.Ability
         public float damageMultiplier = 1.0f;
         public float realDamage => damage * damageMultiplier;
 
-        private int _name;
-        private int _description;
-        public bool _onCooldown;
+        private int name;
+        private int description;
+        public bool onCooldown;
 
         public int level;
         public int maxLevel;
@@ -32,6 +31,7 @@ namespace Gameplay.Character.Ability
         {
             if (level < maxLevel)
             {
+                
                 level++;
             }
         }
@@ -45,8 +45,8 @@ namespace Gameplay.Character.Ability
         }
         private IEnumerator OnCooldown()
         {
-            _onCooldown = true;
-            currentCooldown = _cooldown;
+            onCooldown = true;
+            currentCooldown = cooldown;
             while (currentCooldown > 0)
             {
                 currentCooldown -= 0.01f;
@@ -57,7 +57,7 @@ namespace Gameplay.Character.Ability
 
         public virtual void OnEndCooldown()
         {
-            _onCooldown = false;
+            onCooldown = false;
         }
         public void RotateCharacaterByTheMouse()
         {

@@ -5,33 +5,36 @@ using Gameplay.Character.Ability.AbilityEvents;
 using UnityEngine;
 using Gameplay.Character.Ability;
 
-public class SecondRemySkill : Ability
+namespace Gameplay.Character.Ability.Remy
 {
-    private float radius = 5;
-    private void Awake()
+    public class SecondRemySkill : Ability
     {
-        this.BindGameEventObserver<SecondAbilityEvent>(OnPress);
-    }
-    public override void UpLevel()
-    {
-        base.UpLevel();
-        damage *= 1.2f;
-        if(level == 4)
+        private float _radius = 5;
+        private void Awake()
         {
-            radius *= 1.5f;
+            this.BindGameEventObserver<SecondAbilityEvent>(OnPress);
         }
-    }
-    public override void OnPress()
-    {
-        if (!_onCooldown && level != 0)
+        public override void UpLevel()
         {
-            base.OnPress();
-            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, radius);
-            foreach (Collider hitCollider in hitColliders)
+            base.UpLevel();
+            damage *= 1.2f;
+            if (level == 4)
             {
-                if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
+                _radius *= 1.5f;
+            }
+        }
+        public override void OnPress()
+        {
+            if (!onCooldown && level != 0)
+            {
+                base.OnPress();
+                Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, _radius);
+                foreach (Collider hitCollider in hitColliders)
                 {
-                    target.ApplyDamage((int)realDamage);
+                    if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
+                    {
+                        target.ApplyDamage((int)realDamage);
+                    }
                 }
             }
         }

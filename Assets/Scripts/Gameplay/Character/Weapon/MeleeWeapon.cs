@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeapon : Weapon
+namespace Gameplay.Character.Weapons
 {
-    [SerializeField] public GameObject attackPoint;
+    public class MeleeWeapon : Weapon
+    {
+        [SerializeField] public GameObject attackPoint;
+    }
 }

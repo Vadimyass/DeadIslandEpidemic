@@ -1,28 +1,32 @@
+using Gameplay.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Bullet : MonoBehaviour
+namespace Gameplay.Character.Weapons
 {
-
-    [SerializeField] private float _speed;
-    [SerializeField] private Rigidbody _rb;
-    private float _damage;
-    
-    public void OnStart(float damage, int range)
+    [RequireComponent(typeof(Rigidbody))]
+    public class Bullet : MonoBehaviour
     {
-        _damage = damage;
-        _rb.velocity = transform.right * _speed;
-        Destroy(gameObject, range/_speed);
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.TryGetComponent(out ZombieMelee zombie))
+        [SerializeField] private float _speed;
+        [SerializeField] private Rigidbody _rb;
+        private float _damage;
+
+        public void OnStart(float damage, int range)
         {
-            zombie.ApplyDamage((int)_damage);
-            Destroy(gameObject);
+            _damage = damage;
+            _rb.velocity = transform.right * _speed;
+            Destroy(gameObject, range / _speed);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out ITargetable target))
+            {
+                target.ApplyDamage((int)_damage);
+                Destroy(gameObject);
+            }
         }
     }
 }

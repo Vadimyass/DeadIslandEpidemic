@@ -1,4 +1,5 @@
 ﻿using Gameplay.Character.AnimationControllers;
+using Gameplay.Character.Weapons;
 using Gameplay.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace Gameplay.Character.CombatSystem
 
         public MeleeAttackController(CharacterAnimationController animationController, Weapon meleeWeapon)
         {
-            this._characterAnimator = animationController;
-            _attackType = AttackType.Melee;
+            this.characterAnimator = animationController;
+            attackType = AttackType.Melee;
             _meleeWeapon = meleeWeapon as MeleeWeapon;
         }
 
