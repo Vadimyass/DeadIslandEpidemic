@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DeadIsland.Events;
-using Gameplay.Character.Ability.AbilityEvents;
+using Gameplay.Character.Abilities.AbilityEvents;
 using Gameplay.Character.AnimationControllers;
 using Gameplay.Character.CombatSystem;
 using Gameplay.Character.MovementControllers;
+using Gameplay.Character.Weapons;
 using Gameplay.Interfaces;
 using UnityEngine;
 
@@ -18,11 +19,11 @@ namespace Gameplay.Character
             Melee,
             Range
         }
-        [SerializeField] private MeleeWeapon _meleeWeapon;
-        [SerializeField] private RangeWeapon _rangeWeapon;
-        [SerializeField] private CharacterAnimationController _animationController;
+        private MeleeWeapon _meleeWeapon;
+        private RangeWeapon _rangeWeapon;
+        private CharacterAnimationController _animationController;
 
-        [SerializeField] private float _attackSpeed;
+        private float _attackSpeed;
 
         private RangeAttackController _rangeAttackController;
         private MeleeAttackController _meleeAttackController;
@@ -30,6 +31,14 @@ namespace Gameplay.Character
         private CharacterAttack _currentAttackController;
         
         private AttackType _combatState;
+
+        public void SetParams(MeleeWeapon meleeWeapon, RangeWeapon rangeWeapon, CharacterAnimationController animationController, float attackSpeed)
+        {
+            _meleeWeapon = meleeWeapon;
+            _rangeWeapon = rangeWeapon;
+            _animationController = animationController;
+            _attackSpeed = attackSpeed;
+        }
 
         void Start()
         {

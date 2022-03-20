@@ -1,6 +1,6 @@
 ﻿using DeadIsland.Events;
 
-namespace Gameplay.Character.Ability.AbilityEvents
+namespace Gameplay.Character.Abilities.AbilityEvents
 {
     public class SecondAbilityEvent: EventBase
     {

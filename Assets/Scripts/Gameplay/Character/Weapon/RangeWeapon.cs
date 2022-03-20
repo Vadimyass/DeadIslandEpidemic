@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RangeWeapon : Weapon
+namespace Gameplay.Character.Weapons
 {
-    [SerializeField] public GameObject shotStart;
-    [SerializeField] public string BULLET_PATH;
-    
-    
+    public class RangeWeapon : Weapon
+    {
+        [SerializeField] public GameObject shotStart;
+        [SerializeField] public string BULLET_PATH;
+
+
+    }
 }

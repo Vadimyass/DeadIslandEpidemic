@@ -7,16 +7,16 @@ namespace Gameplay.Character.CombatSystem
 {
     public abstract class CharacterAttack
     {
-        public AttackType _attackType;
-        public CharacterAnimationController _characterAnimator;
+        public AttackType attackType;
+        public CharacterAnimationController characterAnimator;
         public virtual void SetAttackState()
         {
-            _characterAnimator.PlayAttackState(_attackType);
+            characterAnimator.PlayAttackState(attackType);
         }
 
         public virtual void Shoot()
         {
-            _characterAnimator.PlayAttackAnimation();
+            characterAnimator.PlayAttackAnimation();
         }
     }
 }

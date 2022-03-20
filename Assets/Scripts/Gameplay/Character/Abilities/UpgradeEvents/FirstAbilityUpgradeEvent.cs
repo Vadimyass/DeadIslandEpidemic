@@ -1,6 +1,6 @@
 using DeadIsland.Events;
 
-namespace Gameplay.Character.Ability.UpgradeEvents
+namespace Gameplay.Character.Abilities.UpgradeEvents
 {
     public class FirstAbilityUpgradeEvent : EventBase
     {

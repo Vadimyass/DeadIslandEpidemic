@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+namespace Gameplay.Character.Weapons
 {
-    [SerializeField] public string _name;
-    [SerializeField] public float damage;
-    public float damageMultiplier = 1.0f;
-    public float realDamage => damage * damageMultiplier;
-    [SerializeField] public int attackRange;
+    public class Weapon : MonoBehaviour
+    {
+        [SerializeField] public string name;
+        [SerializeField] public float damage;
+        public float damageMultiplier = 1.0f;
+        public float realDamage => damage * damageMultiplier;
+        [SerializeField] public int attackRange;
+    }
 }
