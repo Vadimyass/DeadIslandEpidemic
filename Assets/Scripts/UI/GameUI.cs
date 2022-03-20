@@ -106,6 +106,7 @@ public class GameUI : MonoBehaviour
         new WaitForFixedUpdate();
         abilityLevel.fillAmount = (float)ability.level / (float)ability.maxLevel;
         CheckForUpgradingPosibility();
+
     }
 
     public void TriggerUpAbilityLevelEvent(int skillNumber)
