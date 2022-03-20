@@ -20,12 +20,7 @@ namespace Gameplay.Character.CombatSystem
             attackType = AttackType.Melee;
             _meleeWeapon = meleeWeapon as MeleeWeapon;
         }
-
-        public override void Shoot()
-        {
-            base.Shoot();
-        }
-
+        
         public void DealDamage()
         {
             Collider[] hitColliders = Physics.OverlapSphere(_meleeWeapon.attackPoint.transform.position, 0.5f);

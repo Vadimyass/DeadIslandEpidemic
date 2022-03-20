@@ -3987,9 +3987,6 @@ GameObject:
   - component: {fileID: 6389846662764982217}
   - component: {fileID: 897888740910154274}
   - component: {fileID: 3808016598144626009}
-  - component: {fileID: 8559721902485018381}
-  - component: {fileID: 5959605583261673133}
-  - component: {fileID: 8700927129556811642}
   - component: {fileID: 4011806219422259148}
   m_Layer: 0
   m_Name: Remy
@@ -4073,12 +4070,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6389846662764982195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e70b2bcdab54081bce858742e7545b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
 --- !u!114 &6389846662764982194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,7 +4256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904bf5dabadfd7e448e5e98e5b148cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loader: {fileID: 8700927129556811642}
   _combatController: {fileID: 6389846662764982192}
   _heroLeveling: {fileID: 6389846662764982217}
   _movement: {fileID: 6389846662764982193}
@@ -4274,48 +4269,8 @@ MonoBehaviour:
   _health: {fileID: 4011806219422259148}
   _meleeWeapon: {fileID: 6264765959360630411}
   _rangeWeapon: {fileID: 5932039534069027372}
-  _animator: {fileID: 362178955314196339}
   _characterStatus: {fileID: 4500745070364087116}
   _statusView: {fileID: 3632436352930379958}
---- !u!114 &8559721902485018381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6389846662764982195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 545ee81a450621e488bae7f5af011f61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5959605583261673133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6389846662764982195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e1cf8d33d57184b93bc714b09f1c43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8700927129556811642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6389846662764982195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de79aa8319b4d8409c4ca1af2fbd188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sheetId: 1BrIV6YcFDdqYhjaai0nSQy7qMz4zCsZREpFstccekbg
-  _data:
-    HeroOptionsList: []
 --- !u!114 &4011806219422259148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6591,9 +6546,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
---- !u!1 &3731695579543686123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7293947010267347182, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
+--- !u!4 &6268620177749955597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4072197404026632, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
   m_PrefabInstance: {fileID: 6264765959099724549}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5932039534069027372 stripped
@@ -6607,9 +6562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f9b3ee7da294b4581d2df7fd5795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6268620177749955597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4072197404026632, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
+--- !u!1 &3731695579543686123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7293947010267347182, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
   m_PrefabInstance: {fileID: 6264765959099724549}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6440371193931561348

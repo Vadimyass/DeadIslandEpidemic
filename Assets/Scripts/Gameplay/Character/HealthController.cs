@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.Character
 {
-    public class HealthController : MonoBehaviour, ITargetable
+    public class HealthController : ITargetable
     {
         private float _maxHealth;
         private float _currentHealth;

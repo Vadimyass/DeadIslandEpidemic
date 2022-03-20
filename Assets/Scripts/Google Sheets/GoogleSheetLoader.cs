@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using Utils;
 
 [RequireComponent(typeof(CVSLoader), typeof(SheetProcessor))]
 public class GoogleSheetLoader : MonoBehaviour
 {
+    public static GoogleSheetLoader Instance;
     public event Action<HeroSheetsData> OnProcessData;
 
     [SerializeField] private string _sheetId;
@@ -14,9 +16,15 @@ public class GoogleSheetLoader : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         _cvsLoader = GetComponent<CVSLoader>();
         _sheetProcessor = GetComponent<SheetProcessor>();
         DownloadTable();
+    }
+
+    public HeroSheetsData GetTable()
+    {
+        return _data;
     }
 
     private void DownloadTable()

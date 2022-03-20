@@ -16,7 +16,7 @@ namespace Gameplay.Character.CombatSystem
 
         public virtual void Shoot()
         {
-            characterAnimator.PlayAttackAnimation();
+            characterAnimator?.PlayAttackAnimation();
         }
     }
 }

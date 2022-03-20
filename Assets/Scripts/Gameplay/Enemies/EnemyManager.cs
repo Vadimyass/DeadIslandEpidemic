@@ -8,13 +8,12 @@ namespace Gameplay.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
-        [SerializeField] private HealthController _health;
         [SerializeField] private float _hp;
         [SerializeField] private CharactersStatusView _characterStatus;
 
         private void Awake()
         {
-            _health.SetParams(_hp, _characterStatus, gameObject);
+            new HealthController().SetParams(_hp, _characterStatus, gameObject);
         }
     }
 }

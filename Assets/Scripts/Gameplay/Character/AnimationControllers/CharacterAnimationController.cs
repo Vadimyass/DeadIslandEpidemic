@@ -10,20 +10,15 @@ namespace Gameplay.Character.AnimationControllers
     public class CharacterAnimationController : MonoBehaviour
     {
         private Animator _animator;
-        private MovementController _characterMovement;
         private bool _isAttacking = false;
 
         private void Awake()
         {
             _animator = gameObject.GetComponent<Animator>();
         }
-        public void SetParams(MovementController movementController)
+        public void SetSpeedToBlendTree(float speed)
         {
-            _characterMovement = movementController;
-        }
-        private void Update()
-        {
-            _animator.SetFloat("Speed",_characterMovement.SpeedMagnitude);
+            _animator.SetFloat("Speed",speed);
         }
 
         public void PlayAttackState(AttackType attackType)

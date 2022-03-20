@@ -38,10 +38,7 @@ namespace Gameplay.Character
             _rangeWeapon = rangeWeapon;
             _animationController = animationController;
             _attackSpeed = attackSpeed;
-        }
-
-        void Start()
-        {
+            
             Init(AttackType.Melee);
             _animationController.RefreshAttackSpeed(_attackSpeed);
         }

@@ -50,25 +50,25 @@ namespace UI.GameUI
         {
             _abilities = abilityContainer;
             _heroLeveling = heroLeveling;
-            //Бинд ивента на повышение лвла игрока
+            //ГЃГЁГ­Г¤ ГЁГўГҐГ­ГІГ  Г­Г  ГЇГ®ГўГ»ГёГҐГ­ГЁГҐ Г«ГўГ«Г  ГЁГЈГ°Г®ГЄГ 
             this.BindGameEventObserver<UpLevelEvent>(UpPlayerLevel);
 
-            //Бинд ивентов на нажимание абилок
+            //ГЃГЁГ­Г¤ ГЁГўГҐГ­ГІГ®Гў Г­Г  Г­Г Г¦ГЁГ¬Г Г­ГЁГҐ Г ГЎГЁГ«Г®ГЄ
             this.BindGameEventObserver<FirstAbilityEvent>((eventBase) => StartCooldown(_firstAbilityCooldownMeter, _abilities.firstAbility, _firstAbilityCooldown));
             this.BindGameEventObserver<SecondAbilityEvent>((eventBase) => StartCooldown(_secondAbilityCooldownMeter, _abilities.secondAbility, _secondAbilityCooldown));
             this.BindGameEventObserver<ThirdAbilityEvent>((eventBase) => StartCooldown(_thirdAbilityCooldownMeter, _abilities.thirdAbility, _thirdAbilityCooldown));
             this.BindGameEventObserver<UltimateAbilityEvent>((eventBase) => StartCooldown(_ultimateAbilityCooldownMeter, _abilities.ultimateAbility, _ultimateAbilityCooldown));
 
-            //Бинд ивентов на прокачку абилок
+            //ГЃГЁГ­Г¤ ГЁГўГҐГ­ГІГ®Гў Г­Г  ГЇГ°Г®ГЄГ Г·ГЄГі Г ГЎГЁГ«Г®ГЄ
             this.BindGameEventObserver<FirstAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_firstAbilityLevel, _abilities.firstAbility, _firstAbilityCooldownMeter));
             this.BindGameEventObserver<SecondAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_secondAbilityLevel, _abilities.secondAbility, _secondAbilityCooldownMeter));
             this.BindGameEventObserver<ThirdAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_thirdAbilityLevel, _abilities.thirdAbility, _thirdAbilityCooldownMeter));
             this.BindGameEventObserver<UltimateAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_ultimateAbilityLevel, _abilities.ultimateAbility, _ultimateAbilityCooldownMeter));
 
-            //Чекаем могут ли апгрейдиться скилы
+            //Г—ГҐГЄГ ГҐГ¬ Г¬Г®ГЈГіГІ Г«ГЁ Г ГЇГЈГ°ГҐГ©Г¤ГЁГІГјГ±Гї Г±ГЄГЁГ«Г»
             CheckForUpgradingPosibility();
 
-            //Привязываем кнопки к ивентам прокачки абилок
+            //ГЏГ°ГЁГўГїГ§Г»ГўГ ГҐГ¬ ГЄГ­Г®ГЇГЄГЁ ГЄ ГЁГўГҐГ­ГІГ Г¬ ГЇГ°Г®ГЄГ Г·ГЄГЁ Г ГЎГЁГ«Г®ГЄ
             _firstAbilityUpgrade.onClick.AddListener(() => { new FirstAbilityUpgradeEvent().Invoke(); });
             _secondAbilityUpgrade.onClick.AddListener(() => { new SecondAbilityUpgradeEvent().Invoke(); });
             _thirdAbilityUpgrade.onClick.AddListener(() => { new ThirdAbilityUpgradeEvent().Invoke(); });

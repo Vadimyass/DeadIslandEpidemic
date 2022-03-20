@@ -1,3 +1,4 @@
+using System;
 using Gameplay.CameraController;
 using Gameplay.Character.Abilities;
 using Gameplay.Character.AnimationControllers;
@@ -12,7 +13,6 @@ using UnityEngine;
 namespace Gameplay.Character {
     public class CharacterManager : MonoBehaviour
     {
-        [SerializeField] private GoogleSheetLoader _loader;
         [SerializeField] private CombatController _combatController;
         [SerializeField] private HeroLeveling _heroLeveling;
         [SerializeField] private MovementController _movement;
@@ -23,21 +23,24 @@ namespace Gameplay.Character {
         [SerializeField] private Ability _thirdAbility;
         [SerializeField] private Ability _ultimateAbility;
         [SerializeField] private AbilityContainer _abilityContainer;
-        [SerializeField] private HealthController _health;
+        private HealthController _health;
         [SerializeField] private MeleeWeapon _meleeWeapon;
         [SerializeField] private RangeWeapon _rangeWeapon;
         [SerializeField] private CharactersStatusView _characterStatus;
         [SerializeField] private PlayerStatusView _statusView;
+
         private void Awake()
         {
-            _loader.OnProcessData += SetAllParameters;
+            _health = new HealthController();
+            
+            SetAllParameters(GoogleSheetLoader.Instance.GetTable());
         }
 
         private void SetAllParameters(HeroSheetsData data)
         {
             _heroData.SetData(data);
-            _movement.SetParams(_heroData.movementSpeed);
-            _characterAnimation.SetParams(_movement);            
+            _movement.SetParams(_heroData.movementSpeed,_characterAnimation);
+            _movement.enabled = true;
             _combatController.SetParams(_meleeWeapon, _rangeWeapon, _characterAnimation, _heroData.attackSpeed);
             _abilityContainer.SetParams(_firstAbility, _secondAbility, _thirdAbility, _ultimateAbility);
             _heroLeveling.SetParams(_abilityContainer);
