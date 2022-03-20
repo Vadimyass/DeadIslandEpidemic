@@ -12,10 +12,9 @@ namespace Gameplay.Character.Abilities.Remy
     {
         [SerializeField] private float _chargeSpeed;
         [SerializeField] private float _maximumDistance;
-        [SerializeField] private Health _hp;
+        [SerializeField] private HealthController _hp;
         private Vector3 originPosition;
         private float _originalDamage;
-
         public override void UpLevel()
         {
             base.UpLevel();
@@ -35,6 +34,7 @@ namespace Gameplay.Character.Abilities.Remy
         {
             if (!onCooldown && level != 0)
             {
+                ClientSend.SendInvokeFirstSkill(Vector3.one);
                 base.OnPress();
                 originPosition = transform.position;
                 combatController.RotateCharacaterByTheMouse();

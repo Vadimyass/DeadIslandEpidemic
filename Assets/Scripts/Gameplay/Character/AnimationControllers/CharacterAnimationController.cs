@@ -13,9 +13,12 @@ namespace Gameplay.Character.AnimationControllers
         private MovementController _characterMovement;
         private bool _isAttacking = false;
 
-        public void SetParams(Animator animator, MovementController movementController)
+        private void Awake()
         {
-            _animator = animator;
+            _animator = gameObject.GetComponent<Animator>();
+        }
+        public void SetParams(MovementController movementController)
+        {
             _characterMovement = movementController;
         }
         private void Update()

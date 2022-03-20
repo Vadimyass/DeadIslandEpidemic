@@ -31,6 +31,7 @@ namespace Gameplay.Character.MovementControllers
             
             _playerMovement.Normalize();
             transform.Translate(_playerMovement * _speed * Time.deltaTime, Space.World);
+            ClientSend.PlayerMovement(transform.position, _playerMovement);
             transform.forward =  _playerMovement != Vector3.zero ? _playerMovement : transform.forward;
         }
     }

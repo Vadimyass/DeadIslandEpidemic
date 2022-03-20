@@ -12,6 +12,7 @@ using UnityEngine;
 namespace Gameplay.Character {
     public class CharacterManager : MonoBehaviour
     {
+        [SerializeField] private GoogleSheetLoader _loader;
         [SerializeField] private CombatController _combatController;
         [SerializeField] private HeroLeveling _heroLeveling;
         [SerializeField] private MovementController _movement;
@@ -22,26 +23,25 @@ namespace Gameplay.Character {
         [SerializeField] private Ability _thirdAbility;
         [SerializeField] private Ability _ultimateAbility;
         [SerializeField] private AbilityContainer _abilityContainer;
-        [SerializeField] private Health _health;
+        [SerializeField] private HealthController _health;
         [SerializeField] private MeleeWeapon _meleeWeapon;
         [SerializeField] private RangeWeapon _rangeWeapon;
-        [SerializeField] private Animator _animator;
         [SerializeField] private CharactersStatusView _characterStatus;
         [SerializeField] private PlayerStatusView _statusView;
-
         private void Awake()
         {
-            SetAllParameters();
+            _loader.OnProcessData += SetAllParameters;
         }
 
-        private void SetAllParameters()
+        private void SetAllParameters(HeroSheetsData data)
         {
+            _heroData.SetData(data);
             _movement.SetParams(_heroData.movementSpeed);
-            _characterAnimation.SetParams(_animator, _movement);            
+            _characterAnimation.SetParams(_movement);            
             _combatController.SetParams(_meleeWeapon, _rangeWeapon, _characterAnimation, _heroData.attackSpeed);
             _abilityContainer.SetParams(_firstAbility, _secondAbility, _thirdAbility, _ultimateAbility);
             _heroLeveling.SetParams(_abilityContainer);
-            _health.SetParams(_heroData.health, _characterStatus);
+            _health.SetParams(_heroData.health, _characterStatus, gameObject);
             _statusView.SetParams(_heroLeveling, _abilityContainer);
         }
     } 

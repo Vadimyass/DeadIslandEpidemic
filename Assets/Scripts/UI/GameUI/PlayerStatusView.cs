@@ -50,9 +50,6 @@ namespace UI.GameUI
         {
             _abilities = abilityContainer;
             _heroLeveling = heroLeveling;
-        }
-        void Start()
-        {
             //Бинд ивента на повышение лвла игрока
             this.BindGameEventObserver<UpLevelEvent>(UpPlayerLevel);
 

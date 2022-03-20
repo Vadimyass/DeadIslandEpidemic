@@ -8,22 +8,21 @@ using UnityEngine.UI;
 
 namespace Gameplay.Character
 {
-    public class Health : MonoBehaviour, ITargetable
+    public class HealthController : MonoBehaviour, ITargetable
     {
         private float _maxHealth;
         private float _currentHealth;
         private CharactersStatusView _characterStatus;
+        private GameObject _character;
         public bool isImmune = false;
         private int _xpFromDeath = 200;
 
-        public void SetParams(float health, CharactersStatusView characterStatus)
+        public void SetParams(float health, CharactersStatusView characterStatus, GameObject character)
         {
             _maxHealth = health;
-            _characterStatus = characterStatus;
-        }
-        private void Start()
-        {
             _currentHealth = _maxHealth;
+            _character = character;
+            _characterStatus = characterStatus;
         }
 
         public void ApplyDamage(int damage)
@@ -31,7 +30,7 @@ namespace Gameplay.Character
             if (!isImmune)
             {
                 _currentHealth -= damage;
-                _characterStatus.healthBar.fillAmount = _currentHealth / _maxHealth;
+                _characterStatus.CharacterTakeDamage(_currentHealth / _maxHealth);
                 if (_currentHealth <= 0)
                 {
                     Death();
@@ -41,8 +40,8 @@ namespace Gameplay.Character
         }
         private void Death()
         {
-            Destroy(gameObject);
-            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 5);
+            UnityEngine.GameObject.Destroy(_character);
+            Collider[] hitColliders = Physics.OverlapSphere(_character.transform.position, 5);
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.gameObject.TryGetComponent(out HeroLeveling player))

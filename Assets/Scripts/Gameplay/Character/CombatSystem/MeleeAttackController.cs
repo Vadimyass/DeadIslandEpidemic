@@ -24,7 +24,6 @@ namespace Gameplay.Character.CombatSystem
         public override void Shoot()
         {
             base.Shoot();
-            
         }
 
         public void DealDamage()
