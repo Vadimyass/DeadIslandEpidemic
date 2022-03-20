@@ -11,6 +11,11 @@ namespace Gameplay.CameraController
         [Range(0.01f, 1.0f)] 
         public float smoothness = 0.5f;
 
+
+        public void SetParams(Transform player)
+        {
+            _player = player;
+        }
         private void Start()
         {
             cameraOffset = transform.position - _player.position;

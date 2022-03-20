@@ -13,6 +13,7 @@ namespace Gameplay.Character.Abilities
         [SerializeField] public float cooldown;
         public float currentCooldown;
         [SerializeField] public CharacterAnimationController animationController;
+        [SerializeField] public CombatController combatController;
 
         [SerializeField] public float damage;
         public float damageMultiplier = 1.0f;
@@ -57,20 +58,8 @@ namespace Gameplay.Character.Abilities
 
         public virtual void OnEndCooldown()
         {
+            Debug.Log("Cooldown End");
             onCooldown = false;
-        }
-        public void RotateCharacaterByTheMouse()
-        {
-            Plane playerplane = new Plane(Vector3.up, transform.position);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float hitdist;
-
-            if (playerplane.Raycast(ray, out hitdist))
-            {
-                Vector3 targetpoint = ray.GetPoint(hitdist);
-                Quaternion targetrotation = Quaternion.LookRotation(targetpoint - transform.position);
-                transform.rotation = targetrotation;
-            }
         }
     }
 }

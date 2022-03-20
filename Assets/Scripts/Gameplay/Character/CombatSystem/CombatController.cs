@@ -91,7 +91,7 @@ namespace Gameplay.Character
             }
         }
 
-        private void RotateCharacaterByTheMouse()
+        public void RotateCharacaterByTheMouse()
         {
             Plane playerplane = new Plane(Vector3.up, transform.position);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

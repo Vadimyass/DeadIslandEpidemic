@@ -45,8 +45,6 @@ namespace UI.GameUI
 
         [SerializeField] private Image _xpMeter;
         [SerializeField] private TextMeshProUGUI _level;
-        
-        [SerializeField] private Button testButton;
 
         public void SetParams(HeroLeveling heroLeveling, AbilityContainer abilityContainer)
         {
@@ -85,9 +83,6 @@ namespace UI.GameUI
             _secondAbilityImage.sprite = _abilities.secondAbility.abilityImage;
             _thirdAbilityImage.sprite = _abilities.thirdAbility.abilityImage;
             _ultimateAbilityImage.sprite = _abilities.ultimateAbility.abilityImage;
-
-            //ÄËß ÒÅÑÒÈÐÎÂÀÍÈß
-            testButton.onClick.AddListener(() => { _heroLeveling.TakeXP(200); });
         }
         public void StartCooldown(Image abilityCooldownMeter, Ability ability, TextMeshProUGUI abilityCooldown)
         {

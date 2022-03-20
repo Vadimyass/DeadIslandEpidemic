@@ -37,7 +37,7 @@ namespace Gameplay.Character.Abilities.Remy
             {
                 base.OnPress();
                 originPosition = transform.position;
-                RotateCharacaterByTheMouse();
+                combatController.RotateCharacaterByTheMouse();
                 StartCoroutine(Charge());
             }
         }
