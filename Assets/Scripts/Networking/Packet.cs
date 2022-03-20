@@ -9,17 +9,7 @@ public enum ServerPackets
 {
     welcome = 1,
     spawnPlayer,
-    playerPosition,
-    playerRotation,
     playerDisconnected,
-    playerHealth,
-    playerRespawned,
-    createItemSpawner,
-    itemSpawned,
-    itemPickedUp,
-    spawnProjectile,
-    projectilePosition,
-    projectileExploded,
     spawnEnemy,
     enemyPosition,
     enemyHealth
@@ -30,8 +20,10 @@ public enum ClientPackets
 {
     welcomeReceived = 1,
     playerMovement,
-    playerShoot,
-    playerThrowItem
+    playerAnimationBool,
+    playerAnimationTrigger,
+    playerRotation,
+    firstSkillInvokation,
 }
 
 public class Packet : IDisposable

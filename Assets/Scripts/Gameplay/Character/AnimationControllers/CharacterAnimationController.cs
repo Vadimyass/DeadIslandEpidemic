@@ -21,12 +21,14 @@ namespace Gameplay.Character.AnimationControllers
         public void PlayAttackState(AttackType attackType)
         {
             bool isMeleeAttack = attackType == AttackType.Melee;
-            _animator.SetBool("IsMelee", isMeleeAttack);
+            _animator.SetBool(AnimationNameType.isMelee.ToString(), isMeleeAttack);
+            ClientSend.PlayerAnimationBool(AnimationNameType.isMelee,isMeleeAttack);
         }
 
         public void PlayAttackAnimation()
         {
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger(AnimationNameType.Attack.ToString());
+            ClientSend.PlayerAnimationTrigger(AnimationNameType.Attack);
             _isAttacking = true;
         }
 

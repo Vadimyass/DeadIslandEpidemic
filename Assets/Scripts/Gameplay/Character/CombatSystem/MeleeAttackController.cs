@@ -13,7 +13,6 @@ namespace Gameplay.Character.CombatSystem
     class MeleeAttackController: CharacterAttack
     {
         private MeleeWeapon _meleeWeapon;
-
         public MeleeAttackController(CharacterAnimationController animationController, Weapon meleeWeapon)
         {
             this._characterAnimator = animationController;

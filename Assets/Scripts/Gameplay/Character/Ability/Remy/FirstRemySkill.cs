@@ -35,6 +35,7 @@ public class FirstRemySkill : Ability
             base.OnPress();
             originPosition = transform.position;
             RotateCharacaterByTheMouse();
+            ClientSend.SendInvokeFirstSkill(transform.position);
             StartCoroutine(Charge());
         }
     }

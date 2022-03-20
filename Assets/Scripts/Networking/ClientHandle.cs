@@ -54,13 +54,13 @@ public class ClientHandle : MonoBehaviour
         }
     }
 
-    public static void PlayerDisconnected(Packet _packet)
+    /*public static void PlayerDisconnected(Packet _packet)
     {
         int _id = _packet.ReadInt();
 
         Destroy(GameManager.players[_id].gameObject);
         GameManager.players.Remove(_id);
-    }
+    }*/
 
     /*
     public static void PlayerHealth(Packet _packet)
@@ -98,12 +98,11 @@ public class ClientHandle : MonoBehaviour
     }
     
 
-    public static void SpawnEnemy(Packet _packet)
+    public static void SpawnEnemy(Packet packet)
     {
-        int _enemyId = _packet.ReadInt();
-        Vector3 _position = _packet.ReadVector3();
+        Vector3 position = packet.ReadVector3();
 
-        GameManager.instance.SpawnEnemy(_enemyId, _position);
+        GameManager.instance.SpawnEnemy(position);
     }
 
     public static void EnemyPosition(Packet _packet)

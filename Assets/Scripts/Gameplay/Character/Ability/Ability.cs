@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.Character.Ability
 {
-    public class Ability : MonoBehaviour
+    public abstract class Ability : MonoBehaviour
     {
         [SerializeField] public Sprite abilityImage;
         private int _level;

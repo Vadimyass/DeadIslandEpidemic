@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Character.AnimationControllers;
 using UnityEngine;
 
 public class ClientSend : MonoBehaviour
@@ -24,25 +25,68 @@ public class ClientSend : MonoBehaviour
     /// <summary>Lets the server know that the welcome message was received.</summary>
     public static void WelcomeReceived()
     {
-        using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
+        using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
         {
-            _packet.Write(Client.instance.myId);
-            _packet.Write("KEKKEKE123");
+            packet.Write(Client.instance.myId);
+            packet.Write("KEKKEKE123");
 
-            SendTCPData(_packet);
+            SendTCPData(packet);
         }
     }
 
     /// <summary>Sends player input to the server.</summary>
-    /// <param name="_inputs"></param>
-    public static void PlayerMovement(Vector3 movementInput)
+    /// <param name="inputs"></param>
+    public static void PlayerMovement(Vector3 positionInput,Vector3 movementInput)
     {
-        using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+        using (Packet packet = new Packet((int)ClientPackets.playerMovement))
         {
-            _packet.Write(movementInput);
-
-            SendUDPData(_packet);
+            packet.Write(positionInput);
+            packet.Write(movementInput);
+            
+            SendUDPData(packet);
         }
     }
+
+    public static void PlayerAnimationBool(AnimationNameType animationNameType, bool animationBool)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerAnimationBool))
+        {
+            packet.Write(animationNameType.ToString());
+            packet.Write(animationBool);
+
+            SendTCPData(packet);
+        }
+    }
+    
+    public static void PlayerAnimationTrigger(AnimationNameType animationNameType)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerAnimationTrigger))
+        {
+            packet.Write(animationNameType.ToString());
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void SendPlayerRotation(Quaternion quaternionInput)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerRotation))
+        {
+            packet.Write(quaternionInput);
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void SendInvokeFirstSkill(Vector3 positionToLook)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.firstSkillInvokation))
+        {
+            packet.Write(positionToLook);
+            
+            SendTCPData(packet);
+        }
+    }
+    
     #endregion
 }

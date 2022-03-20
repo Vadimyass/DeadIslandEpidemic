@@ -91,16 +91,9 @@ namespace Gameplay.Character
             if (playerplane.Raycast(ray, out hitdist))
             {
                 Vector3 targetpoint = ray.GetPoint(hitdist);
-                Quaternion targetrotation = Quaternion.LookRotation(targetpoint - transform.position);
-                if (_combatState == AttackType.Melee)
-                {
-                    transform.rotation = targetrotation;
-                }
-                else
-                {
-                    transform.rotation = targetrotation * Quaternion.Euler(0, 35, 0);
-                }
-       
+                Quaternion targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
+                transform.rotation = _combatState == AttackType.Melee ? targetRotation : targetRotation * Quaternion.Euler(0, 35, 0);
+                ClientSend.SendPlayerRotation(transform.rotation);
             }
         }
 
