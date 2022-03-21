@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DeadIsland.Events;
 using UnityEngine;
 using UnityEngine.UI;
+using Gameplay.Character.MovementControllers;
 
 namespace Gameplay.Character.Abilities
 {
@@ -13,7 +14,7 @@ namespace Gameplay.Character.Abilities
         [SerializeField] public float cooldown;
         public float currentCooldown;
         [SerializeField] public CharacterAnimationController animationController;
-        [SerializeField] public CombatController combatController;
+        [SerializeField] public MovementController movementController;
 
         [SerializeField] public float damage;
         public float damageMultiplier = 1.0f;

@@ -41,7 +41,7 @@ namespace Gameplay.Character {
             _heroData.SetData(data);
             _movement.SetParams(_heroData.movementSpeed,_characterAnimation);
             _movement.enabled = true;
-            _combatController.SetParams(_meleeWeapon, _rangeWeapon, _characterAnimation, _heroData.attackSpeed);
+            _combatController.SetParams(_meleeWeapon, _rangeWeapon, _characterAnimation, _heroData.attackSpeed, _movement);
             _abilityContainer.SetParams(_firstAbility, _secondAbility, _thirdAbility, _ultimateAbility);
             _heroLeveling.SetParams(_abilityContainer);
             _health.SetParams(_heroData.health, _characterStatus, gameObject);

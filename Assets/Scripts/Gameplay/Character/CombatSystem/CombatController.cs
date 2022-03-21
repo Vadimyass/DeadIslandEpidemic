@@ -23,6 +23,7 @@ namespace Gameplay.Character
         private RangeWeapon _rangeWeapon;
         private CharacterAnimationController _animationController;
 
+        private MovementController _movementController;
         private float _attackSpeed;
 
         private RangeAttackController _rangeAttackController;
@@ -32,11 +33,12 @@ namespace Gameplay.Character
         
         private AttackType _combatState;
 
-        public void SetParams(MeleeWeapon meleeWeapon, RangeWeapon rangeWeapon, CharacterAnimationController animationController, float attackSpeed)
+        public void SetParams(MeleeWeapon meleeWeapon, RangeWeapon rangeWeapon, CharacterAnimationController animationController, float attackSpeed, MovementController movementController)
         {
             _meleeWeapon = meleeWeapon;
             _rangeWeapon = rangeWeapon;
             _animationController = animationController;
+            _movementController = movementController;
             _attackSpeed = attackSpeed;
             
             Init(AttackType.Melee);
@@ -66,7 +68,7 @@ namespace Gameplay.Character
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                RotateCharacaterByTheMouse();
+                _movementController.RotateCharacaterByTheMouse();
                 _currentAttackController.Shoot();
             }
 
@@ -88,20 +90,7 @@ namespace Gameplay.Character
             }
         }
 
-        public void RotateCharacaterByTheMouse()
-        {
-            Plane playerplane = new Plane(Vector3.up, transform.position);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float hitdist;
-
-            if (playerplane.Raycast(ray, out hitdist))
-            {
-                Vector3 targetpoint = ray.GetPoint(hitdist);
-                Quaternion targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
-                transform.rotation = _combatState == AttackType.Melee ? targetRotation : targetRotation * Quaternion.Euler(0, 35, 0);
-                ClientSend.SendPlayerRotation(transform.rotation);
-            }
-        }
+        
 
         private void SetCharacterAttackByAttackType()
         {

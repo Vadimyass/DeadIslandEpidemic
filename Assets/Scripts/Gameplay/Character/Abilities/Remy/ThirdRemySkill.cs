@@ -32,7 +32,7 @@ namespace Gameplay.Character.Abilities.Remy
             if (!onCooldown && level != 0)
             {
                 base.OnPress();
-                combatController.RotateCharacaterByTheMouse();
+                movementController.RotateCharacaterByTheMouse();
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
                 foreach (Collider hitCollider in hitColliders)
                 {

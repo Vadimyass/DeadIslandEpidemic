@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using Plane = UnityEngine.Plane;
+using static Gameplay.Character.CombatController;
 
 namespace Gameplay.Character.MovementControllers
 {
@@ -16,9 +19,20 @@ namespace Gameplay.Character.MovementControllers
         private CharacterAnimationController _characterAnimationController;
         
         private Vector3 _playerMovement;
-        
+        public void RotateCharacaterByTheMouse()
+        {
+            Plane playerplane = new Plane(Vector3.up, transform.position);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float hitdist;
 
-
+            if (playerplane.Raycast(ray, out hitdist))
+            {
+                Vector3 targetpoint = ray.GetPoint(hitdist);
+                Quaternion targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
+                transform.rotation = targetRotation;
+                ClientSend.SendPlayerRotation(transform.rotation);
+            }
+        }
         public void SetParams(float moveSpeed ,CharacterAnimationController characterAnimationController )
         {
             _speed = moveSpeed;

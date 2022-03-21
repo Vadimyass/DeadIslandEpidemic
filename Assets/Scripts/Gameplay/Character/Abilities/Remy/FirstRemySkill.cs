@@ -12,7 +12,7 @@ namespace Gameplay.Character.Abilities.Remy
     {
         [SerializeField] private float _chargeSpeed;
         [SerializeField] private float _maximumDistance;
-        [SerializeField] private HealthController _hp;
+        private HealthController _hp;
         private Vector3 originPosition;
         private float _originalDamage;
         public override void UpLevel()
@@ -37,13 +37,13 @@ namespace Gameplay.Character.Abilities.Remy
                 ClientSend.SendInvokeFirstSkill(Vector3.one);
                 base.OnPress();
                 originPosition = transform.position;
-                combatController.RotateCharacaterByTheMouse();
+                movementController.RotateCharacaterByTheMouse();
                 StartCoroutine(Charge());
             }
         }
         private IEnumerator Charge()
         {
-            _hp.isImmune = true;
+            //_hp.isImmune = true;
             float damageFromDistance;
             while (Vector3.Distance(transform.position, originPosition) < _maximumDistance)
             {
@@ -52,7 +52,7 @@ namespace Gameplay.Character.Abilities.Remy
                 transform.position += transform.forward * _chargeSpeed * 0.01f * (1 / (damageFromDistance));
                 yield return new WaitForSeconds(0.01f);
             }
-            _hp.isImmune = false;
+            //_hp.isImmune = false;
             damage = _originalDamage;
         }
         private void OnTriggerEnter(Collider other)

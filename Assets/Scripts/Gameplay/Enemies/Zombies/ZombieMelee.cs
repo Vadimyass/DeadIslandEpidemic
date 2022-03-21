@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Gameplay.Character.Leveling;
 using UI.GameUI;
 
-namespace Gameplay.Enemies.Zombies
+namespace Gameplay.Enemies.Zombies 
 {
     public class ZombieMelee : MonoBehaviour
     {
