@@ -23,6 +23,12 @@ public class SheetProcessor : MonoBehaviour
     private const int _idThirdSkill = 10;
     private const int _idUltimateSkill = 11;
 
+    private const int _skillID = 0;
+    private const int _skillName = 1;
+    private const int _skillDamage = 2;
+    private const int _skillHeal = 3;
+    private const int _skillCooldown = 4;
+
     private const char _cellSeporator = ',';
     private const char _inCellSeporator = ';';
 
@@ -37,7 +43,7 @@ public class SheetProcessor : MonoBehaviour
         {
             string[] cells = rows[i].Split(_cellSeporator);
 
-            int name = ParseInt(cells[_name]);
+            string name = cells[_name];
             int power = ParseInt(cells[_power]);
             float damageAmp = ParseFloat(cells[_damageAmp]);
             int health = ParseInt(cells[_health]);
@@ -68,6 +74,36 @@ public class SheetProcessor : MonoBehaviour
             }) ;
         }
         Debug.Log(data.HeroOptionsList.ToString());
+        return data;
+
+    }
+    public HeroSkillsSheetsData ProcessSkillData(string cvsRawData)
+    {
+        char lineEnding = GetPlatformSpecificLineEnd();
+        string[] rows = cvsRawData.Split(lineEnding);
+        int dataStartRawIndex = 1;
+        HeroSkillsSheetsData data = new HeroSkillsSheetsData();
+        data.HeroSkillsList = new List<HeroSkill>();
+        for (int i = dataStartRawIndex; i < rows.Length; i++)
+        {
+            string[] cells = rows[i].Split(_cellSeporator);
+
+            int id = ParseInt(cells[_skillID]);
+            string name = cells[_skillName];
+            float damage = ParseFloat(cells[_skillDamage]);
+            float heal = ParseFloat(cells[_skillHeal]);
+            float cooldown = ParseFloat(cells[_skillCooldown]);
+
+            data.HeroSkillsList.Add(new HeroSkill()
+            {          
+                Id = id,
+                Name = name,
+                Damage = damage,
+                Heal = heal,
+                Cooldown =cooldown
+            });
+        }
+        Debug.Log(data.HeroSkillsList.ToString());
         return data;
 
     }

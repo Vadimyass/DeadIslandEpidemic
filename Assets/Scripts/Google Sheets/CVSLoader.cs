@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 public class CVSLoader : MonoBehaviour
 {
     private bool _debug = true;
-    private const string url = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
+    private const string url = "https://docs.google.com/spreadsheets/d/1BrIV6YcFDdqYhjaai0nSQy7qMz4zCsZREpFstccekbg/export?format=csv&gid=*";
 
-    public void DownloadTable(string sheetId, Action<string> onSheetLoadedAction)
+    public void DownloadTable(string sheetId, string listId, Action<string> onSheetLoadedAction)
     {
-        string actualUrl = url.Replace("*", sheetId);
+        string actualUrl = url.Replace("*", listId);
         StartCoroutine(DownloadRawCvsTable(actualUrl, onSheetLoadedAction));
     }
 

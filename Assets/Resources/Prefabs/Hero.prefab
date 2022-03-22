@@ -3986,7 +3986,9 @@ GameObject:
   - component: {fileID: 6389846662764982216}
   - component: {fileID: 6389846662764982217}
   - component: {fileID: 897888740910154274}
+  - component: {fileID: 2450720124435660284}
   - component: {fileID: 3808016598144626009}
+  - component: {fileID: 8750740500880437177}
   m_Layer: 0
   m_Name: Remy
   m_TagString: Untagged
@@ -4098,12 +4100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2a759fa0f02d54e91fd444ea65635a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 21300000, guid: b0d8f79b02943714e9d35b0c34b89762, type: 3}
-  cooldown: 8
+  abilityImage: {fileID: 0}
+  cooldown: 0
   currentCooldown: 0
-  animationController: {fileID: 6389846662764982194}
-  movementController: {fileID: 6389846662764982193}
-  damage: 35
+  animationController: {fileID: 0}
+  movementController: {fileID: 0}
+  damage: 0
+  heal: 0
   damageMultiplier: 1
   onCooldown: 0
   level: 0
@@ -4123,12 +4126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dcc6ea6653303468a3d45e6995ab52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 21300000, guid: 39e238d969058ee40a822c5454b07813, type: 3}
-  cooldown: 5
+  abilityImage: {fileID: 0}
+  cooldown: 0
   currentCooldown: 0
-  animationController: {fileID: 6389846662764982194}
-  movementController: {fileID: 6389846662764982193}
-  damage: 45
+  animationController: {fileID: 0}
+  movementController: {fileID: 0}
+  damage: 0
+  heal: 0
   damageMultiplier: 1
   onCooldown: 0
   level: 0
@@ -4146,12 +4150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeae681ab6e0de0418967fac755c2cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 21300000, guid: 3560812bffbbad04da2af812b7672f7b, type: 3}
-  cooldown: 8
+  abilityImage: {fileID: 0}
+  cooldown: 0
   currentCooldown: 0
-  animationController: {fileID: 6389846662764982194}
-  movementController: {fileID: 6389846662764982193}
-  damage: 55
+  animationController: {fileID: 0}
+  movementController: {fileID: 0}
+  damage: 0
+  heal: 0
   damageMultiplier: 1
   onCooldown: 0
   level: 0
@@ -4170,12 +4175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ce78b86bd2ff54eade62d03965e38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 21300000, guid: 832ab2333222a4243a1ef85c82654626, type: 3}
-  cooldown: 80
+  abilityImage: {fileID: 0}
+  cooldown: 0
   currentCooldown: 0
-  animationController: {fileID: 6389846662764982194}
-  movementController: {fileID: 6389846662764982193}
+  animationController: {fileID: 0}
+  movementController: {fileID: 0}
   damage: 0
+  heal: 0
   damageMultiplier: 1
   onCooldown: 0
   level: 0
@@ -4194,10 +4200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4928b266a9d4645b79247bf4de81b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAbility: {fileID: 6389846662764982197}
-  secondAbility: {fileID: 6389846662764982198}
-  thirdAbility: {fileID: 6389846662764982219}
-  ultimateAbility: {fileID: 6389846662764982218}
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  ultimateAbility: {fileID: 0}
 --- !u!114 &6389846662764982217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4233,15 +4239,47 @@ MonoBehaviour:
   meleeWeaponModificator: 0
   rangeWeaponName: 
   rangeWeaponModificator: 0
-  firstAbilityName: 
-  secondAbilityName: 
-  thirdAbilityName: 
-  ultimateAbilityName: 
+  firstAbilityId: 0
+  secondAbilityId: 0
+  thirdAbilityId: 0
+  ultimateAbilityId: 0
   power: 0
   health: 0
   movementSpeed: 0
   meleeDamageAplification: 0
   rangeDamageAplification: 0
+--- !u!114 &2450720124435660284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6389846662764982195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e24379b4ad7dc41beab0cbaa5686d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSkillId: 0
+  firstSkillName: 
+  firstSkillDamage: 0
+  firstSkillHeal: 0
+  firstSkillCooldown: 0
+  secondSkillId: 0
+  secondSkillName: 
+  secondSkillDamage: 0
+  secondSkillHeal: 0
+  secondSkillCooldown: 0
+  thirdSkillId: 0
+  thirdSkillName: 
+  thirdSkillDamage: 0
+  thirdSkillHeal: 0
+  thirdSkillCooldown: 0
+  ultimateSkillId: 0
+  ultimateSkillName: 
+  ultimateSkillDamage: 0
+  ultimateSkillHeal: 0
+  ultimateSkillCooldown: 0
 --- !u!114 &3808016598144626009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4264,10 +4302,24 @@ MonoBehaviour:
   _thirdAbility: {fileID: 6389846662764982219}
   _ultimateAbility: {fileID: 6389846662764982218}
   _abilityContainer: {fileID: 6389846662764982216}
+  _health: {fileID: 8750740500880437177}
   _meleeWeapon: {fileID: 6264765959360630411}
   _rangeWeapon: {fileID: 5932039534069027372}
   _characterStatus: {fileID: 4500745070364087116}
   _statusView: {fileID: 3632436352930379958}
+  _skillsManager: {fileID: 2450720124435660284}
+--- !u!114 &8750740500880437177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6389846662764982195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a542cf71f40e842800e62d051d9217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6485830556493249431
 GameObject:
   m_ObjectHideFlags: 0
@@ -6530,16 +6582,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
---- !u!1 &3731695579543686123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7293947010267347182, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
-  m_PrefabInstance: {fileID: 6264765959099724549}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6268620177749955597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4072197404026632, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
-  m_PrefabInstance: {fileID: 6264765959099724549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5932039534069027372 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 333897442654888233, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
@@ -6551,6 +6593,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f9b3ee7da294b4581d2df7fd5795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6268620177749955597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4072197404026632, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
+  m_PrefabInstance: {fileID: 6264765959099724549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3731695579543686123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7293947010267347182, guid: eedb02d5022eae8419dfe61ce8b8db75, type: 3}
+  m_PrefabInstance: {fileID: 6264765959099724549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6440371193931561348
 PrefabInstance:
   m_ObjectHideFlags: 0

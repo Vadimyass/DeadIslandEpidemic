@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class HeroSheetsData
 {
@@ -9,9 +10,9 @@ public class HeroSheetsData
     public override string ToString()
     {
         string result = "";
-        HeroOptionsList.ForEach(o =>
+        HeroOptionsList.ForEach(hero =>
         {
-            result += o.ToString();
+            result += hero.ToString();
         });
         return result;
     }
@@ -19,7 +20,7 @@ public class HeroSheetsData
 [System.Serializable]
 public class HeroOptions
 {
-    public int Name;
+    public string Name;
     public int Power;
     public float DamageAmp;
     public int Health;
@@ -35,5 +36,35 @@ public class HeroOptions
     public override string ToString()
     {
         return $"Name {Name} \nPower {Power} \nDamageAmp {DamageAmp} \nHealth {Health} \nMovementSpeed {MovementSpeed} \nMeleeDamageAmp {MeleeDamageAmp} \nRangeDamageAmp {RangeDamageAmp} \nAttackSpeed {AttackSpeed} \nIdFirstSkill {IdFirstSkill} \nIdSecondSkill {IdSecondSkill} \nIdThirdSkill {IdThirdSkill} \nIdUltimateSkill {IdUltimateSkill}";
+    }
+}
+
+[System.Serializable]
+public class HeroSkillsSheetsData
+{
+    public List<HeroSkill> HeroSkillsList;
+
+    public override string ToString()
+    {
+        string result = "";
+        HeroSkillsList.ForEach(skill =>
+        {
+            result += skill.ToString();
+        });
+        return result;
+    }
+}
+
+[System.Serializable]
+public class HeroSkill
+{
+    public int Id;
+    public string Name;
+    public float Damage;
+    public float Heal;
+    public float Cooldown;
+    public override string ToString()
+    {
+        return $"ID {Id} \nName {Name} \nDamage {Damage} \n Heal {Heal} \n Cooldown{Cooldown}";
     }
 }

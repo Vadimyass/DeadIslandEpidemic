@@ -9,7 +9,11 @@ public class GoogleSheetLoader : MonoBehaviour
     public event Action<HeroSheetsData> OnProcessData;
 
     [SerializeField] private string _sheetId;
+    [SerializeField] private string _skillsListId;
+    [SerializeField] private string _heroesListId;
     [SerializeField] private HeroSheetsData _data;
+    [SerializeField] private HeroSkillsSheetsData _skillsData;
+    [SerializeField] private bool isSkills;
 
     private CVSLoader _cvsLoader;
     private SheetProcessor _sheetProcessor;
@@ -19,22 +23,35 @@ public class GoogleSheetLoader : MonoBehaviour
         Instance = this;
         _cvsLoader = GetComponent<CVSLoader>();
         _sheetProcessor = GetComponent<SheetProcessor>();
-        DownloadTable();
+        DownloadHeroesTable();
+        DownloadSkillTable();
     }
 
     public HeroSheetsData GetTable()
     {
         return _data;
     }
-
-    private void DownloadTable()
+    public HeroSkillsSheetsData GetSkillTable()
     {
-        _cvsLoader.DownloadTable(_sheetId, OnRawCVSLoaded);
+        return _skillsData;
+    }
+
+    private void DownloadHeroesTable()
+    {
+        _cvsLoader.DownloadTable(_sheetId, _heroesListId, OnRawCVSLoaded);
+    }
+    private void DownloadSkillTable()
+    {
+        _cvsLoader.DownloadTable(_sheetId, _skillsListId, OnRawSkillCVSLoaded);
     }
 
     private void OnRawCVSLoaded(string rawCVSText)
     {
         _data = _sheetProcessor.ProcessData(rawCVSText);
-        OnProcessData?.Invoke(_data);
     }
+    private void OnRawSkillCVSLoaded(string rawCVSText)
+    {
+        _skillsData = _sheetProcessor.ProcessSkillData(rawCVSText);
+    }
+    
 }

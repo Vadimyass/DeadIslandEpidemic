@@ -10,17 +10,19 @@ namespace Gameplay.Character.Abilities
 {
     public abstract class Ability : MonoBehaviour
     {
-        [SerializeField] public Sprite abilityImage;
-        [SerializeField] public float cooldown;
+        private int _id;
+        public Sprite abilityImage;
+        public float cooldown;
         public float currentCooldown;
-        [SerializeField] public CharacterAnimationController animationController;
-        [SerializeField] public MovementController movementController;
+        public CharacterAnimationController animationController;
+        public MovementController movementController;
+        public float damage;
+        public float heal;
 
-        [SerializeField] public float damage;
         public float damageMultiplier = 1.0f;
         public float realDamage => damage * damageMultiplier;
 
-        private int name;
+        private string _name;
         private int description;
         public bool onCooldown;
 
@@ -29,6 +31,18 @@ namespace Gameplay.Character.Abilities
 
         public int[] minLvlForUpgrade = new int[4];
 
+
+        public void SetParams(int id, float _cooldown, CharacterAnimationController _characterAnimationController, MovementController _movementController, float _damage, string name, float _heal)
+        {
+            _id = id;
+            _name = name;
+            heal = _heal;
+            animationController = _characterAnimationController;
+            movementController = _movementController;
+            damage = _damage;
+            cooldown = _cooldown;
+            abilityImage = Resources.Load<Sprite>("AbilityImages/" + _id.ToString());
+        }
         public virtual void UpLevel()
         {
             if (level < maxLevel)

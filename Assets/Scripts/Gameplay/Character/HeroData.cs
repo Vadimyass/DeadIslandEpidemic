@@ -5,7 +5,7 @@ namespace Gameplay.Character
 {
     public class HeroData : MonoBehaviour
     {
-        public int heroName;
+        public string heroName;
 
         public float damageAmplification;
         public float attackSpeed;
@@ -16,10 +16,10 @@ namespace Gameplay.Character
         public string rangeWeaponName;
         public float rangeWeaponModificator;
 
-        public string firstAbilityName;
-        public string secondAbilityName;
-        public string thirdAbilityName;
-        public string ultimateAbilityName;
+        public int firstAbilityId;
+        public int secondAbilityId;
+        public int thirdAbilityId;
+        public int ultimateAbilityId;
 
         public int power;
         public int health;
@@ -39,10 +39,10 @@ namespace Gameplay.Character
             meleeDamageAplification = realData.MeleeDamageAmp;
             rangeDamageAplification = realData.RangeDamageAmp;
             attackSpeed = realData.AttackSpeed;
-            firstAbilityName = realData.IdFirstSkill.ToString();
-            secondAbilityName = realData.IdSecondSkill.ToString();
-            thirdAbilityName = realData.IdThirdSkill.ToString();
-            ultimateAbilityName = realData.IdUltimateSkill.ToString();
+            firstAbilityId = realData.IdFirstSkill;
+            secondAbilityId = realData.IdSecondSkill;
+            thirdAbilityId = realData.IdThirdSkill;
+            ultimateAbilityId = realData.IdUltimateSkill;
         }
     }
 

@@ -798,8 +798,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sheetId: 1BrIV6YcFDdqYhjaai0nSQy7qMz4zCsZREpFstccekbg
+  _skillsListId: 113323138
+  _heroesListId: 0
   _data:
     HeroOptionsList: []
+  _skillsData:
+    HeroSkillsList: []
+  isSkills: 0
 --- !u!114 &537382720
 MonoBehaviour:
   m_ObjectHideFlags: 0

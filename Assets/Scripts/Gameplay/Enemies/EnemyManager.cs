@@ -10,10 +10,14 @@ namespace Gameplay.Enemies
     {
         [SerializeField] private float _hp;
         [SerializeField] private CharactersStatusView _characterStatus;
+        [SerializeField] private Health _health;
+        private HealthController _healthController;
 
         private void Awake()
         {
-            new HealthController().SetParams(_hp, _characterStatus, gameObject);
+            _healthController = new HealthController();
+            _healthController.SetParams(_hp, _characterStatus, gameObject);
+            _health.SetParams(_healthController);
         }
     }
 }
