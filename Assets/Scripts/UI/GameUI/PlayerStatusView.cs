@@ -9,13 +9,14 @@ using Gameplay.Character.Leveling;
 using Gameplay.Character.Leveling.Events;
 using TMPro;
 using Gameplay.Character.Abilities.UpgradeEvents;
+using Gameplay.Character;
 
 namespace UI.GameUI
 {
     public class PlayerStatusView : MonoBehaviour
     {
         private HeroLeveling _heroLeveling;
-        private AbilityContainer _abilities;
+        private AbilitiesData _abilities;
 
 
         [SerializeField] private Image _firstAbilityImage;
@@ -46,29 +47,24 @@ namespace UI.GameUI
         [SerializeField] private Image _xpMeter;
         [SerializeField] private TextMeshProUGUI _level;
 
-        public void SetParams(HeroLeveling heroLeveling, AbilityContainer abilityContainer)
+        public void SetParams(HeroLeveling heroLeveling, AbilitiesData abilityContainer)
         {
             _abilities = abilityContainer;
             _heroLeveling = heroLeveling;
-            //Áèíä èâåíòà íà ïîâûøåíèå ëâëà èãðîêà
             this.BindGameEventObserver<UpLevelEvent>(UpPlayerLevel);
 
-            //Áèíä èâåíòîâ íà íàæèìàíèå àáèëîê
             this.BindGameEventObserver<FirstAbilityEvent>((eventBase) => StartCooldown(_firstAbilityCooldownMeter, _abilities.firstAbility, _firstAbilityCooldown));
             this.BindGameEventObserver<SecondAbilityEvent>((eventBase) => StartCooldown(_secondAbilityCooldownMeter, _abilities.secondAbility, _secondAbilityCooldown));
             this.BindGameEventObserver<ThirdAbilityEvent>((eventBase) => StartCooldown(_thirdAbilityCooldownMeter, _abilities.thirdAbility, _thirdAbilityCooldown));
             this.BindGameEventObserver<UltimateAbilityEvent>((eventBase) => StartCooldown(_ultimateAbilityCooldownMeter, _abilities.ultimateAbility, _ultimateAbilityCooldown));
 
-            //Áèíä èâåíòîâ íà ïðîêà÷êó àáèëîê
             this.BindGameEventObserver<FirstAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_firstAbilityLevel, _abilities.firstAbility, _firstAbilityCooldownMeter));
             this.BindGameEventObserver<SecondAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_secondAbilityLevel, _abilities.secondAbility, _secondAbilityCooldownMeter));
             this.BindGameEventObserver<ThirdAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_thirdAbilityLevel, _abilities.thirdAbility, _thirdAbilityCooldownMeter));
             this.BindGameEventObserver<UltimateAbilityUpgradeEvent>((eventBase) => UpAbilityLevel(_ultimateAbilityLevel, _abilities.ultimateAbility, _ultimateAbilityCooldownMeter));
 
-            //×åêàåì ìîãóò ëè àïãðåéäèòüñÿ ñêèëû
             CheckForUpgradingPosibility();
 
-            //Ïðèâÿçûâàåì êíîïêè ê èâåíòàì ïðîêà÷êè àáèëîê
             _firstAbilityUpgrade.onClick.AddListener(() => { new FirstAbilityUpgradeEvent().Invoke(); });
             _secondAbilityUpgrade.onClick.AddListener(() => { new SecondAbilityUpgradeEvent().Invoke(); });
             _thirdAbilityUpgrade.onClick.AddListener(() => { new ThirdAbilityUpgradeEvent().Invoke(); });

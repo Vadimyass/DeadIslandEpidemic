@@ -15,9 +15,9 @@ namespace Gameplay.Character.Leveling
         private int _maxLevel = 20;
         [SerializeField] public int[] needXP = new int[10];
         public int upgradePoints;
-        private AbilityContainer _abilities;
+        private AbilitiesData _abilities;
 
-        public void SetParams(AbilityContainer abilityContainer)
+        public void SetParams(AbilitiesData abilityContainer)
         {
             _abilities = abilityContainer;
         }

@@ -32,15 +32,15 @@ namespace Gameplay.Character.Abilities
         public int[] minLvlForUpgrade = new int[4];
 
 
-        public void SetParams(int id, float _cooldown, CharacterAnimationController _characterAnimationController, MovementController _movementController, float _damage, string name, float _heal)
+        public void SetParams(HeroSkill skillData, CharacterAnimationController _characterAnimationController, MovementController _movementController)
         {
-            _id = id;
-            _name = name;
-            heal = _heal;
+            _id = skillData.Id;
+            _name = skillData.Name;
+            heal = skillData.Heal;
             animationController = _characterAnimationController;
             movementController = _movementController;
-            damage = _damage;
-            cooldown = _cooldown;
+            damage = skillData.Damage;
+            cooldown = skillData.Cooldown;
             abilityImage = Resources.Load<Sprite>("AbilityImages/" + _id.ToString());
         }
         public virtual void UpLevel()

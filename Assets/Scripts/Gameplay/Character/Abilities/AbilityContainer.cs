@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.Character.Abilities
 {
-    public class AbilityContainer : MonoBehaviour
+    public class SkillData : MonoBehaviour
     {
         public Ability firstAbility;
         public Ability secondAbility;

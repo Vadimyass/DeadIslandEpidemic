@@ -1,70 +1,43 @@
+using Gameplay.Character.Abilities;
+using Gameplay.Character.AnimationControllers;
+using Gameplay.Character.MovementControllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Character
 {
-    public class SkillsData : MonoBehaviour
+    public class AbilitiesData
     {
-        public int firstSkillId;
-        public string firstSkillName;
-        public float firstSkillDamage;
-        public float firstSkillHeal;
-        public float firstSkillCooldown;
+        public Ability firstAbility;
+        public Ability secondAbility;
+        public Ability thirdAbility;
+        public Ability ultimateAbility;
 
-        public int secondSkillId;
-        public string secondSkillName;
-        public float secondSkillDamage;
-        public float secondSkillHeal;
-        public float secondSkillCooldown;
-
-        public int thirdSkillId;
-        public string thirdSkillName;
-        public float thirdSkillDamage;
-        public float thirdSkillHeal;
-        public float thirdSkillCooldown;
-
-        public int ultimateSkillId;
-        public string ultimateSkillName;
-        public float ultimateSkillDamage;
-        public float ultimateSkillHeal;
-        public float ultimateSkillCooldown;
-
-        public void SetData(HeroSkillsSheetsData data, HeroData heroData)
+        public void SetData(HeroSkillsSheetsData data, HeroData heroData, CharacterAnimationController characterAnimationController, MovementController movementController, Ability firstAbility, Ability secondAbility, Ability thirdAbility, Ability ultimateAbility )
         {
+            this.firstAbility = firstAbility;
+            this.secondAbility = secondAbility;
+            this.thirdAbility = thirdAbility;
+            this.ultimateAbility = ultimateAbility;
+
             foreach(var skill in data.HeroSkillsList)
             {
                 if(skill.Id == heroData.firstAbilityId)
                 {
-                    firstSkillId = skill.Id;
-                    firstSkillName = skill.Name;
-                    firstSkillDamage = skill.Damage;
-                    firstSkillHeal = skill.Heal;
-                    firstSkillCooldown = skill.Cooldown;
+                    this.firstAbility.SetParams(skill, characterAnimationController, movementController);
                 }
                 if (skill.Id == heroData.secondAbilityId)
                 {
-                    secondSkillId = skill.Id;
-                    secondSkillName = skill.Name;
-                    secondSkillDamage = skill.Damage;
-                    secondSkillHeal = skill.Heal;
-                    secondSkillCooldown = skill.Cooldown;
+                    this.secondAbility.SetParams(skill, characterAnimationController, movementController);
                 }
                 if (skill.Id == heroData.thirdAbilityId)
                 {
-                    thirdSkillId = skill.Id;
-                    thirdSkillName = skill.Name;
-                    thirdSkillDamage = skill.Damage;
-                    thirdSkillHeal = skill.Heal;
-                    thirdSkillCooldown = skill.Cooldown;
+                    this.thirdAbility.SetParams(skill, characterAnimationController, movementController);
                 }
                 if (skill.Id == heroData.ultimateAbilityId)
                 {
-                    ultimateSkillId = skill.Id;
-                    ultimateSkillName = skill.Name;
-                    ultimateSkillDamage = skill.Damage;
-                    ultimateSkillHeal = skill.Heal;
-                    ultimateSkillCooldown = skill.Cooldown;
+                    this.ultimateAbility.SetParams(skill, characterAnimationController, movementController);
                 }
             }
         }
