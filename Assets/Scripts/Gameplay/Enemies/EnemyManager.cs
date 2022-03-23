@@ -16,8 +16,8 @@ namespace Gameplay.Enemies
         private void Awake()
         {
             _healthController = new HealthController();
-            _healthController.SetParams(_hp, _characterStatus, gameObject);
-            _health.SetParams(_healthController);
+            _healthController.SetParams(_hp, _characterStatus, gameObject, CharacterSide.Undead);
+            _health.SetParams(_healthController, CharacterSide.Undead);
         }
     }
 }

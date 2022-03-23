@@ -13,7 +13,7 @@ namespace UI.GameUI
             transform.eulerAngles = Camera.main.transform.eulerAngles;
         }
 
-        public void CharacterTakeDamage(float healthPercentage)
+        public void CharacterChangeHealth(float healthPercentage)
         {
             healthBar.fillAmount = healthPercentage;
         }

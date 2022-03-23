@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Gameplay.Character.Leveling;
 using UI.GameUI;
+using Gameplay.Character;
 
 namespace Gameplay.Enemies.Zombies 
 {
@@ -14,9 +15,12 @@ namespace Gameplay.Enemies.Zombies
         [SerializeField] private int _damage;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ITargetable target))
+            if (other.TryGetComponent(out Health target))
             {
-                target.ApplyDamage(_damage);
+                if (target.characterSide == CharacterSide.Survivor)
+                {
+                    target.ApplyDamage(_damage);
+                }
             }
         }
     }

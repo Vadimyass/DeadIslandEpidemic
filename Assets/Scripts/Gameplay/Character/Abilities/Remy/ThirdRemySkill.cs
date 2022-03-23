@@ -36,12 +36,15 @@ namespace Gameplay.Character.Abilities.Remy
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
                 foreach (Collider hitCollider in hitColliders)
                 {
-                    if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
+                    if (hitCollider.gameObject.TryGetComponent(out Health target))
                     {
                         Vector3 dirToTarget = (hitCollider.transform.position - transform.position).normalized;
                         if (Vector3.Angle(transform.forward, dirToTarget) < _angle / 2)
                         {
-                            target.ApplyDamage((int)realDamage);
+                            if (target.characterSide == CharacterSide.Undead)
+                            {
+                                target.ApplyDamage((int)realDamage);
+                            }
                         }
                     }
                 }

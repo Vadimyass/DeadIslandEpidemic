@@ -8,6 +8,11 @@ using UnityEngine.UI;
 
 namespace Gameplay.Character
 {
+    public enum CharacterSide
+    {
+        Survivor,
+        Undead
+    }
     public class HealthController : ITargetable
     {
         private float _maxHealth;
@@ -16,26 +21,33 @@ namespace Gameplay.Character
         private GameObject _character;
         public bool isImmune = false;
         private int _xpFromDeath = 200;
+        public CharacterSide characterSide;
 
-        public void SetParams(float health, CharactersStatusView characterStatus, GameObject character)
+        public void SetParams(float health, CharactersStatusView characterStatus, GameObject character, CharacterSide _characterSide)
         {
+            characterSide = _characterSide;
             _maxHealth = health;
             _currentHealth = _maxHealth;
             _character = character;
             _characterStatus = characterStatus;
         }
 
+        public void ApplyHeal(int heal)
+        {
+            _currentHealth += heal;
+            _characterStatus.CharacterChangeHealth(_currentHealth / _maxHealth);
+            Debug.Log(heal);
+        }
         public void ApplyDamage(int damage)
         {
             if (!isImmune)
             {
                 _currentHealth -= damage;
-                _characterStatus.CharacterTakeDamage(_currentHealth / _maxHealth);
+                _characterStatus.CharacterChangeHealth(_currentHealth / _maxHealth);
                 if (_currentHealth <= 0)
                 {
                     Death();
                 }
-                Debug.Log(damage);
             }
         }
         private void Death()

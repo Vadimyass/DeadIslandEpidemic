@@ -12,7 +12,7 @@ namespace Gameplay.Character.Abilities.Remy
     {
         [SerializeField] private float _chargeSpeed;
         [SerializeField] private float _maximumDistance;
-        private HealthController _hp;
+        private Health _hp;
         private Vector3 originPosition;
         private float _originalDamage;
         public override void UpLevel()
@@ -28,6 +28,7 @@ namespace Gameplay.Character.Abilities.Remy
         public void Start()
         {
             _originalDamage = damage;
+            _hp = gameObject.GetComponent<Health>();
             this.BindGameEventObserver<FirstAbilityEvent>(OnPress);
         }
         public override void OnPress()
@@ -43,7 +44,7 @@ namespace Gameplay.Character.Abilities.Remy
         }
         private IEnumerator Charge()
         {
-            //_hp.isImmune = true;
+            _hp.healthController.isImmune = true;
             float damageFromDistance;
             while (Vector3.Distance(transform.position, originPosition) < _maximumDistance)
             {
@@ -52,16 +53,19 @@ namespace Gameplay.Character.Abilities.Remy
                 transform.position += transform.forward * _chargeSpeed * 0.01f * (1 / (damageFromDistance));
                 yield return new WaitForSeconds(0.01f);
             }
-            //_hp.isImmune = false;
+            _hp.healthController.isImmune = false;
             damage = _originalDamage;
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (_hp.isImmune)
+            if (_hp.healthController.isImmune)
             {
-                if (other.TryGetComponent(out ITargetable target))
+                if (other.TryGetComponent(out Health target))
                 {
-                    target.ApplyDamage((int)realDamage);
+                    if (target.characterSide == CharacterSide.Undead)
+                    {
+                        target.ApplyDamage((int)realDamage);
+                    }
                 }
             }
         }

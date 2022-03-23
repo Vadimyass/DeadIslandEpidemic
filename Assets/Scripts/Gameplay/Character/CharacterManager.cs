@@ -54,9 +54,10 @@ namespace Gameplay.Character {
 
             _abilityContainer.SetParams(_firstAbility, _secondAbility, _thirdAbility, _ultimateAbility);
             _heroLeveling.SetParams(_abilityContainer);
-            _healthController.SetParams(_heroData.health, _characterStatus, gameObject);
-            _health.SetParams(_healthController);
+            _healthController.SetParams(_heroData.health, _characterStatus, gameObject, CharacterSide.Survivor);
+            _health.SetParams(_healthController, CharacterSide.Survivor);
             _statusView.SetParams(_heroLeveling, _abilityContainer);
+            Debug.Log("All params Seted");
         }
     } 
 }

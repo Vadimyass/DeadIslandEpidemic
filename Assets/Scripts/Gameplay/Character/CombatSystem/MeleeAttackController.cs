@@ -26,10 +26,13 @@ namespace Gameplay.Character.CombatSystem
             Collider[] hitColliders = Physics.OverlapSphere(_meleeWeapon.attackPoint.transform.position, 0.5f);
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.gameObject.TryGetComponent(out ITargetable target))
+                if (hitCollider.gameObject.TryGetComponent(out Health target))
                 {
-                    target.ApplyDamage((int)_meleeWeapon.realDamage);
-                    break;
+                    if (target.characterSide == CharacterSide.Undead)
+                    {
+                        target.ApplyDamage((int)_meleeWeapon.realDamage);
+                        break;
+                    }
                 }
             }
         }

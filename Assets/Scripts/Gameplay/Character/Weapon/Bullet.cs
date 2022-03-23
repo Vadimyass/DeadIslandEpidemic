@@ -22,10 +22,13 @@ namespace Gameplay.Character.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ITargetable target))
+            if (other.TryGetComponent(out Health target))
             {
-                target.ApplyDamage((int)_damage);
-                Destroy(gameObject);
+                if (target.characterSide == CharacterSide.Undead)
+                {
+                    target.ApplyDamage((int)_damage);
+                    Destroy(gameObject);
+                }
             }
         }
     }
