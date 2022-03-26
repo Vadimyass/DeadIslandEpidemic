@@ -14,9 +14,11 @@ namespace Gameplay.Character.Abilities.Remy
         [Range(0, 360)]
         [SerializeField] private float _angle;
 
+
         private void Awake()
         {
-            this.BindGameEventObserver<ThirdAbilityEvent>(OnPress);
+            this.BindGameEventObserver<ThirdAbilityPressEvent>(OnPress);
+            this.BindGameEventObserver<ThirdAbilityEvent>(UseAbility);
         }
         public override void UpLevel()
         {
@@ -27,11 +29,19 @@ namespace Gameplay.Character.Abilities.Remy
                 _angle += 20;
             }
         }
-        public override void OnPress()
+        public override void TriggerAbilityEvent()
+        {
+            if (isPressed)
+            {
+                new ThirdAbilityEvent().Invoke();
+                base.TriggerAbilityEvent();
+            }
+        }
+        public override void UseAbility()
         {
             if (!onCooldown && level != 0)
             {
-                base.OnPress();
+                base.UseAbility();
                 movementController.RotateCharacaterByTheMouse();
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
                 foreach (Collider hitCollider in hitColliders)

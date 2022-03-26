@@ -12,7 +12,8 @@ namespace Gameplay.Character.Abilities.Remy
         private float _radius = 5;
         private void Awake()
         {
-            this.BindGameEventObserver<SecondAbilityEvent>(OnPress);
+            this.BindGameEventObserver<SecondAbilityPressEvent>(OnPress);
+            this.BindGameEventObserver<SecondAbilityEvent>(UseAbility);
         }
         public override void UpLevel()
         {
@@ -23,11 +24,19 @@ namespace Gameplay.Character.Abilities.Remy
                 _radius *= 1.5f;
             }
         }
-        public override void OnPress()
+        public override void TriggerAbilityEvent()
+        {
+            if (isPressed)
+            {
+                new SecondAbilityEvent().Invoke();
+                base.TriggerAbilityEvent();
+            }
+        }
+        public override void UseAbility()
         {
             if (!onCooldown && level != 0)
             {
-                base.OnPress();
+                base.UseAbility();
                 Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, _radius);
                 foreach (Collider hitCollider in hitColliders)
                 {

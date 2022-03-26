@@ -24,14 +24,32 @@ namespace Gameplay.Character.Abilities
 
         private string _name;
         private int description;
-        public bool onCooldown;
+        public bool onCooldown = false;
+
+        public bool isPressed = false;
 
         public int level;
         public int maxLevel;
 
         public int[] minLvlForUpgrade = new int[4];
 
+        public GameObject skillOverview;
 
+        [SerializeField] public GameObject startDrawPoint;
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isPressed = false;
+                skillOverview.SetActive(false);
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                skillOverview.SetActive(false);
+                TriggerAbilityEvent();
+            }
+        }
         public void SetParams(HeroSkill skillData, CharacterAnimationController _characterAnimationController, MovementController _movementController)
         {
             _id = skillData.Id;
@@ -46,18 +64,32 @@ namespace Gameplay.Character.Abilities
         public virtual void UpLevel()
         {
             if (level < maxLevel)
-            {
-                
+            {    
                 level++;
             }
+        }
+        public virtual void TriggerAbilityEvent()
+        {
+            isPressed = false;
+        }
+        public virtual void UseAbility(EventBase eventBase)
+        {
+            UseAbility();
         }
         public virtual void OnPress(EventBase eventBase)
         {
             OnPress();
         }
-        public virtual void OnPress()
+        public virtual void UseAbility()
         {
             StartCoroutine(OnCooldown());
+        }
+        public virtual void OnPress()
+        {
+            if (!onCooldown && level != 0)
+            {
+                StartCoroutine(OnPressed());
+            }
         }
         private IEnumerator OnCooldown()
         {
@@ -70,7 +102,29 @@ namespace Gameplay.Character.Abilities
             }
             OnEndCooldown();
         }
-
+        public IEnumerator OnPressed()
+        {
+            Vector3 targetpoint;
+            Quaternion targetRotation;
+            float hitdist;
+            Ray ray;
+            Plane playerplane;
+            isPressed = true;
+            skillOverview.SetActive(true);
+            while (isPressed)
+            {
+                playerplane = new Plane(Vector3.up, transform.position);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (playerplane.Raycast(ray, out hitdist))
+                {
+                    targetpoint = ray.GetPoint(hitdist);
+                    targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
+                    startDrawPoint.transform.rotation = targetRotation;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            
+        }
         public virtual void OnEndCooldown()
         {
             Debug.Log("Cooldown End");

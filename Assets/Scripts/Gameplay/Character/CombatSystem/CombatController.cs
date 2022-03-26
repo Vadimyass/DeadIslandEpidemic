@@ -30,6 +30,8 @@ namespace Gameplay.Character
         private MeleeAttackController _meleeAttackController;
 
         private CharacterAttack _currentAttackController;
+
+        private bool isPressAbility = false;
         
         private AttackType _combatState;
 
@@ -71,22 +73,30 @@ namespace Gameplay.Character
                 _movementController.RotateCharacaterByTheMouse();
                 _currentAttackController.Shoot();
             }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                isPressAbility = false;
+            }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                new FirstAbilityEvent().Invoke();
+                new FirstAbilityPressEvent().Invoke();
+                isPressAbility = true;
             }
             if(Input.GetKeyDown(KeyCode.E))
             {
-                new SecondAbilityEvent().Invoke();
+                new SecondAbilityPressEvent().Invoke();
+                isPressAbility = true;
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
-                new ThirdAbilityEvent().Invoke();
+                new ThirdAbilityPressEvent().Invoke();
+                isPressAbility = true;
             }
             if(Input.GetKeyDown(KeyCode.F))
             {
-                new UltimateAbilityEvent().Invoke();
+                new UltimateAbilityPressEvent().Invoke();
+                isPressAbility = true;
             }
         }
 

@@ -29,14 +29,23 @@ namespace Gameplay.Character.Abilities.Remy
         {
             _originalDamage = damage;
             _hp = gameObject.GetComponent<Health>();
-            this.BindGameEventObserver<FirstAbilityEvent>(OnPress);
+            this.BindGameEventObserver<FirstAbilityPressEvent>(OnPress);
+            this.BindGameEventObserver<FirstAbilityEvent>(UseAbility);
         }
-        public override void OnPress()
+        public override void TriggerAbilityEvent()
+        {
+            if (isPressed)
+            {
+                new FirstAbilityEvent().Invoke();
+                base.TriggerAbilityEvent();
+            }
+        }
+        public override void UseAbility()
         {
             if (!onCooldown && level != 0)
             {
                 ClientSend.SendInvokeFirstSkill(Vector3.one);
-                base.OnPress();
+                base.UseAbility();
                 originPosition = transform.position;
                 movementController.RotateCharacaterByTheMouse();
                 StartCoroutine(Charge());

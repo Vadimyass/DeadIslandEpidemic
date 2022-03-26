@@ -15,7 +15,8 @@ namespace Gameplay.Character.Abilities.Remy
 
         private void Awake()
         {
-            this.BindGameEventObserver<UltimateAbilityEvent>(OnPress);
+            this.BindGameEventObserver<UltimateAbilityPressEvent>(OnPress);
+            this.BindGameEventObserver<UltimateAbilityEvent>(UseAbility);
         }
         public override void UpLevel()
         {
@@ -26,11 +27,11 @@ namespace Gameplay.Character.Abilities.Remy
                 cooldown -= 20;
             }
         }
-        public override void OnPress()
+        public override void UseAbility()
         {
             if (!onCooldown && level != 0)
             {
-                base.OnPress();
+                base.UseAbility();
                 StartCoroutine(Buff());
             }
         }
