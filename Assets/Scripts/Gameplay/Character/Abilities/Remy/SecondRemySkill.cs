@@ -24,6 +24,14 @@ namespace Gameplay.Character.Abilities.Remy
                 _radius *= 1.5f;
             }
         }
+        public override void OnPress()
+        {
+            base.OnPress();
+            if (!onCooldown && level != 0)
+            {
+                StartCoroutine(OnPressed());
+            }
+        }
         public override void TriggerAbilityEvent()
         {
             if (isPressed)

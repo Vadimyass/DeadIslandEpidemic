@@ -86,10 +86,7 @@ namespace Gameplay.Character.Abilities
         }
         public virtual void OnPress()
         {
-            if (!onCooldown && level != 0)
-            {
-                StartCoroutine(OnPressed());
-            }
+            
         }
         private IEnumerator OnCooldown()
         {
@@ -102,7 +99,7 @@ namespace Gameplay.Character.Abilities
             }
             OnEndCooldown();
         }
-        public IEnumerator OnPressed()
+        public virtual IEnumerator OnPressed()
         {
             Vector3 targetpoint;
             Quaternion targetRotation;

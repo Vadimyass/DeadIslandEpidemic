@@ -32,6 +32,14 @@ namespace Gameplay.Character.Abilities.Remy
             this.BindGameEventObserver<FirstAbilityPressEvent>(OnPress);
             this.BindGameEventObserver<FirstAbilityEvent>(UseAbility);
         }
+        public override void OnPress()
+        {
+            base.OnPress();
+            if (!onCooldown && level != 0)
+            {
+                StartCoroutine(OnPressed());
+            }
+        }
         public override void TriggerAbilityEvent()
         {
             if (isPressed)

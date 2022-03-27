@@ -29,8 +29,9 @@ namespace Gameplay.Character {
         [SerializeField] private CharactersStatusView _characterStatus;
         [SerializeField] private PlayerStatusView _statusView;
         [SerializeField] private AbilitiesData _abilitiesData;
+        [SerializeField] private Bandage _bandage;
 
-        private void Awake()
+        private void Start()
         {
             _healthController = new HealthController();
             _abilitiesData = new AbilitiesData();
@@ -50,6 +51,7 @@ namespace Gameplay.Character {
             _healthController.SetParams(_heroData.health, _characterStatus, gameObject, CharacterSide.Survivor);
             _health.SetParams(_healthController, CharacterSide.Survivor);
             _statusView.SetParams(_heroLeveling, _abilitiesData);
+            _bandage.SetParams(_health);
             Debug.Log("All params Seted");
         }
     } 

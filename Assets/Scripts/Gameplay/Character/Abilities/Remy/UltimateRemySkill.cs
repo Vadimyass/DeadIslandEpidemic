@@ -18,6 +18,22 @@ namespace Gameplay.Character.Abilities.Remy
             this.BindGameEventObserver<UltimateAbilityPressEvent>(OnPress);
             this.BindGameEventObserver<UltimateAbilityEvent>(UseAbility);
         }
+        public override void OnPress()
+        {
+            base.OnPress();
+            if (!onCooldown && level != 0)
+            {
+                TriggerAbilityEvent();
+            }
+        }
+        public override void TriggerAbilityEvent()
+        {
+            if (isPressed)
+            {
+                new UltimateAbilityEvent().Invoke();
+                base.TriggerAbilityEvent();
+            }
+        }
         public override void UpLevel()
         {
             base.UpLevel();

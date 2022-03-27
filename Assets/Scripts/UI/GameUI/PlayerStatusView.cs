@@ -47,6 +47,7 @@ namespace UI.GameUI
         [SerializeField] private Image _xpMeter;
         [SerializeField] private TextMeshProUGUI _level;
 
+        [SerializeField] private Button _testButton;
         public void SetParams(HeroLeveling heroLeveling, AbilitiesData abilityContainer)
         {
             _abilities = abilityContainer;
@@ -69,6 +70,8 @@ namespace UI.GameUI
             _secondAbilityUpgrade.onClick.AddListener(() => { new SecondAbilityUpgradeEvent().Invoke(); });
             _thirdAbilityUpgrade.onClick.AddListener(() => { new ThirdAbilityUpgradeEvent().Invoke(); });
             _ultimateAbilityUpgrade.onClick.AddListener(() => { new UltimateAbilityUpgradeEvent().Invoke(); });
+
+            _testButton.onClick.AddListener(() => { _heroLeveling.TakeXP(200); });
 
             this.BindGameEventObserver<TakeXpEvent>(TakeXP);
 

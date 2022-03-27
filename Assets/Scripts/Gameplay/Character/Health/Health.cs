@@ -4,52 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour, ITargetable
-{
-    public HealthController healthController;
-    public CharacterSide characterSide;
-    private bool _isBandaging = false;
 
-    public void SetParams(HealthController _healthController, CharacterSide _characterSide)
+    public class Health : MonoBehaviour, ITargetable
     {
-        healthController = _healthController;
-        characterSide = _characterSide;
-    }
+        public HealthController healthController;
+        public CharacterSide characterSide;
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        public void SetParams(HealthController _healthController, CharacterSide _characterSide)
         {
-            if (characterSide == CharacterSide.Survivor)
-            {
-                if (!_isBandaging)
-                {
-                    StartCoroutine(Bandaging());
-                }
-            }
+            healthController = _healthController;
+            characterSide = _characterSide;
         }
 
-    }
-    private IEnumerator Bandaging()
-    {
-        _isBandaging = true;
-        int bandageTime = 10;
-        int heal = 10;
-        while(bandageTime > 0)
+
+        public void ApplyHeal(int heal)
         {
-            yield return new WaitForSeconds(1);
-            ApplyHeal(heal);
-            heal *= 2;
-            bandageTime -= 1;
+            healthController.ApplyHeal(heal);
         }
-        _isBandaging = false;
+        public void ApplyDamage(int damage)
+        {
+            healthController.ApplyDamage(damage);
+        }
     }
-    public void ApplyHeal(int heal)
-    {
-        healthController.ApplyHeal(heal);
-    }
-    public void ApplyDamage(int damage)
-    {
-        healthController.ApplyDamage(damage);
-    }
-}
