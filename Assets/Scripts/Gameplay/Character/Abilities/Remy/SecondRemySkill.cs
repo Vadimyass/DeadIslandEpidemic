@@ -4,6 +4,7 @@ using DeadIsland.Events;
 using Gameplay.Character.Abilities.AbilityEvents;
 using UnityEngine;
 using Gameplay.Character.Abilities;
+using System.Collections;
 
 namespace Gameplay.Character.Abilities.Remy
 {
@@ -32,6 +33,25 @@ namespace Gameplay.Character.Abilities.Remy
                 StartCoroutine(OnPressed());
             }
         }
+        public virtual IEnumerator OnPressed()
+        {
+            isPressed = true;
+            skillOverview.SetActive(true);
+            while (isPressed)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 20000000000000000);
+            foreach (Collider hitCollider in hitColliders)
+            {
+                if (hitCollider.gameObject.TryGetComponent(out Outline target))
+                {
+                    target.enabled = false;
+                }
+            }
+        }
+
+        
         public override void TriggerAbilityEvent()
         {
             if (isPressed)

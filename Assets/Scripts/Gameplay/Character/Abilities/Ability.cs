@@ -99,29 +99,7 @@ namespace Gameplay.Character.Abilities
             }
             OnEndCooldown();
         }
-        public virtual IEnumerator OnPressed()
-        {
-            Vector3 targetpoint;
-            Quaternion targetRotation;
-            float hitdist;
-            Ray ray;
-            Plane playerplane;
-            isPressed = true;
-            skillOverview.SetActive(true);
-            while (isPressed)
-            {
-                playerplane = new Plane(Vector3.up, transform.position);
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (playerplane.Raycast(ray, out hitdist))
-                {
-                    targetpoint = ray.GetPoint(hitdist);
-                    targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
-                    startDrawPoint.transform.rotation = targetRotation;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-            
-        }
+       
         public virtual void OnEndCooldown()
         {
             Debug.Log("Cooldown End");

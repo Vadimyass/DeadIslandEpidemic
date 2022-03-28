@@ -19,7 +19,7 @@ namespace Gameplay.Character.Abilities.Remy
             this.BindGameEventObserver<UltimateAbilityEvent>(UseAbility);
         }
         public override void OnPress()
-        {
+        { 
             base.OnPress();
             if (!onCooldown && level != 0)
             {

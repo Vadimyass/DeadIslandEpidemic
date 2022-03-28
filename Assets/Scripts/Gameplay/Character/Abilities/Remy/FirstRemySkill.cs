@@ -59,6 +59,36 @@ namespace Gameplay.Character.Abilities.Remy
                 StartCoroutine(Charge());
             }
         }
+        public virtual IEnumerator OnPressed()
+        {
+            Vector3 targetpoint;
+            Quaternion targetRotation;
+            float hitdist;
+            Ray ray;
+            Plane playerplane;
+            isPressed = true;
+            skillOverview.SetActive(true);
+            while (isPressed)
+            {
+                playerplane = new Plane(Vector3.up, transform.position);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (playerplane.Raycast(ray, out hitdist))
+                {
+                    targetpoint = ray.GetPoint(hitdist);
+                    targetRotation = Quaternion.LookRotation(targetpoint - transform.position);
+                    startDrawPoint.transform.rotation = targetRotation;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 20000000000000000);
+            foreach (Collider hitCollider in hitColliders)
+            {
+                if (hitCollider.gameObject.TryGetComponent(out Outline target))
+                {
+                    target.enabled = false;
+                }
+            }
+        }
         private IEnumerator Charge()
         {
             _hp.healthController.isImmune = true;
