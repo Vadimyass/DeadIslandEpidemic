@@ -8,9 +8,10 @@ namespace UI.GameUI
     public class CharactersStatusView : MonoBehaviour
     {
         [SerializeField] public Image healthBar;
+        [SerializeField] public Canvas canvas;
         private void LateUpdate()
         {
-            transform.eulerAngles = Camera.main.transform.eulerAngles;
+            canvas.transform.eulerAngles = Camera.main.transform.eulerAngles;
         }
 
         public void CharacterChangeHealth(float healthPercentage)

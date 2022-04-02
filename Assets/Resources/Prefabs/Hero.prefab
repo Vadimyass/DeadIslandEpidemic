@@ -4428,7 +4428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64190b39f05feeb4b93684f4d278751f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 10
+  viewRadius: 5
   viewAngle: 360
   targetMask:
     serializedVersion: 2
@@ -5661,6 +5661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4231155290724006825}
+  canvas: {fileID: 5711590379288465135}
 --- !u!1 &7537734114462657245
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UI.GameUI;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class FieldOfView : MonoBehaviour
 	public LayerMask targetMask;
 	public LayerMask obstacleMask;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
 
 	public float meshResolution;
@@ -30,7 +31,7 @@ public class FieldOfView : MonoBehaviour
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
 
-		StartCoroutine("FindTargetsWithDelay", .2f);
+		StartCoroutine("FindTargetsWithDelay", .1f);
 	}
 
 
@@ -50,19 +51,37 @@ public class FieldOfView : MonoBehaviour
 
 	void FindVisibleTargets()
 	{
+		foreach(Transform visibleTarget in visibleTargets)
+		{
+			if(visibleTarget.gameObject.TryGetComponent(out SkinnedMeshRenderer meshRenderer))
+			{
+				if (visibleTarget.gameObject.TryGetComponent(out CharactersStatusView status))
+				{
+					status.healthBar.gameObject.SetActive(false);
+					meshRenderer.enabled = false;
+				}
+			}
+		}
 		visibleTargets.Clear();
 		Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
-		for (int i = 0; i < targetsInViewRadius.Length; i++)
-		{
-			Transform target = targetsInViewRadius[i].transform;
-			Vector3 dirToTarget = (target.position - transform.position).normalized;
+		foreach (Collider target in targetsInViewRadius)
+		{ 
+			Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
 			if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
 			{
-				float dstToTarget = Vector3.Distance(transform.position, target.position);
+				float dstToTarget = Vector3.Distance(transform.position, target.transform.position);
 				if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
 				{
-					visibleTargets.Add(target);
+					if (target.gameObject.TryGetComponent(out SkinnedMeshRenderer meshRenderer))
+					{
+						if(target.gameObject.TryGetComponent(out CharactersStatusView status))
+						{
+							status.healthBar.gameObject.SetActive(true);
+							meshRenderer.enabled = true;
+						}			
+					}
+					visibleTargets.Add(target.transform);
 				}
 			}
 		}
