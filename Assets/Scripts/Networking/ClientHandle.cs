@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using Gameplay.Character;
 using Gameplay.Character.MovementControllers;
+using Networking;
 using UnityEngine;
 
 
@@ -19,6 +20,7 @@ public class ClientHandle : MonoBehaviour
         Client.instance.myId = _myId;
         ClientSend.WelcomeReceived();
 
+
         // Now that we have the client's id, connect UDP
         Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
     }
@@ -28,7 +30,6 @@ public class ClientHandle : MonoBehaviour
         Debug.Log("Spawn players");
         int id = _packet.ReadInt();
         Vector3 position = _packet.ReadVector3();
-
         GameManager.instance.SpawnPlayer(id, position);
     }
 
