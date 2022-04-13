@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Gameplay.Character;
 using Gameplay.Character.MovementControllers;
+using Networking;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         if (id == Client.instance.myId)
         {
             player = Instantiate(localPlayerPrefab, _position, Quaternion.identity);
+            MovementPrediction.SetClientPlayer(player.gameObject);
             player.id = id;
             players.Add(id, player);
         }

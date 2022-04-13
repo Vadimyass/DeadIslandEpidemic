@@ -26,7 +26,7 @@ namespace Networking
             public float deliveryTime;
             public uint startTickNumber;
 
-            public List<Vector3> inputs;
+            public Vector3 inputs;
         }
 
         public static  GameObject client_player;
@@ -40,7 +40,7 @@ namespace Networking
         private float client_timer;
         private uint client_tick_number;
         private uint client_last_received_state_tick;
-        private const int c_client_buffer_size = 1024;
+        private const int c_client_buffer_size = 50;
         private ClientState[] client_state_buffer; // client stores predicted moves here
         private InputMessage[] client_input_buffer; // client stores predicted inputs here
         private Queue<StateMessage> client_state_msgs;
@@ -83,7 +83,7 @@ namespace Networking
                 Vector3 movementVector = client_player.transform.position;
 
                 // sample and store inputs for this tick
-                this.client_input_buffer[buffer_slot].inputs[(int)client_tick_number] = movementVector;
+                this.client_input_buffer[buffer_slot].inputs = movementVector;
 
                 // store state for this tick, then use current state + input to step simulation
                 this.ClientStoreCurrentStateAndStep(
@@ -96,11 +96,11 @@ namespace Networking
                     InputMessage input_msg;
                     input_msg.deliveryTime = Time.time + this.latency;
                     input_msg.startTickNumber = this.client_send_redundant_inputs ? this.client_last_received_state_tick : client_tick_number;
-                    input_msg.inputs = new List<Vector3>();
+                    input_msg.inputs = Vector3.zero;
 
                     for (uint tick = input_msg.startTickNumber; tick <= client_tick_number; ++tick)
                     {
-                        input_msg.inputs.Add(this.client_input_buffer[tick % c_client_buffer_size].inputs[0]);
+                        input_msg.inputs = client_input_buffer[tick % c_client_buffer_size].inputs;
                     }
                     this.server_input_msgs.Enqueue(input_msg);
                 }

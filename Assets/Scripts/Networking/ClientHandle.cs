@@ -25,11 +25,11 @@ public class ClientHandle : MonoBehaviour
         Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
     }
 
-    public static void SpawnPlayer(Packet _packet)
+    public static void SpawnPlayer(Packet packet)
     {
         Debug.Log("Spawn players");
-        int id = _packet.ReadInt();
-        Vector3 position = _packet.ReadVector3();
+        int id = packet.ReadInt();
+        Vector3 position = packet.ReadVector3();
         GameManager.instance.SpawnPlayer(id, position);
     }
 
