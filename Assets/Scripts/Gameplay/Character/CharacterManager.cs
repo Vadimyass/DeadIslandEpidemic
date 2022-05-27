@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI.GameUI;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Character {
     public class CharacterManager : MonoBehaviour
@@ -31,9 +32,15 @@ namespace Gameplay.Character {
         [SerializeField] private AbilitiesData _abilitiesData;
         [SerializeField] private Bandage _bandage;
 
-        private void Start()
+        [Inject]
+        private void Construct()
         {
             _healthController = new HealthController();
+        }
+
+        private void Start()
+        {
+            
             _abilitiesData = new AbilitiesData();
 
             SetAllParameters(GoogleSheetLoader.Instance.GetTable(), GoogleSheetLoader.Instance.GetSkillTable());

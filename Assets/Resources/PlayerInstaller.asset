@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8a00afb4a9ec446a7c94af8f4de75d, type: 3}
+  m_Name: PlayerInstaller
+  m_EditorClassIdentifier: 
+  _characterConfig: {fileID: 11400000, guid: e331dee45c5a1b84e878d66c2e886f84, type: 2}
+  _heroPrefab: {fileID: 2212197191248367152, guid: 2cf8ff37c218da948828282a5b93a6ea, type: 3}

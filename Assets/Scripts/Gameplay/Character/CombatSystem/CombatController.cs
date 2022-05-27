@@ -8,6 +8,7 @@ using Gameplay.Character.MovementControllers;
 using Gameplay.Character.Weapons;
 using Gameplay.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Character
 {
@@ -34,6 +35,7 @@ namespace Gameplay.Character
         private bool isPressAbility = false;
         
         private AttackType _combatState;
+
 
         public void SetParams(MeleeWeapon meleeWeapon, RangeWeapon rangeWeapon, CharacterAnimationController animationController, float attackSpeed, MovementController movementController)
         {

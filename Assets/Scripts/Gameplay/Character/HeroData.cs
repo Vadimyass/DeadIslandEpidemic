@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+
 namespace Gameplay.Character
 {
     public class HeroData : MonoBehaviour
@@ -11,10 +13,10 @@ namespace Gameplay.Character
         public float attackSpeed;
 
         public string meleeWeaponName;
-        public float meleeWeaponModificator;
+        public float meleeDamageAplification;
 
         public string rangeWeaponName;
-        public float rangeWeaponModificator;
+        public float rangeDamageAplification;
 
         public int firstAbilityId;
         public int secondAbilityId;
@@ -25,9 +27,28 @@ namespace Gameplay.Character
         public int health;
         public int movementSpeed;
 
-        public float meleeDamageAplification;
-        public float rangeDamageAplification;
+        
+        
 
+        [Inject]
+        private void Construct(CharacterConfig characterConfig)
+        {
+            heroName = characterConfig.HeroProperties[0];
+            damageAmplification = float.Parse(characterConfig.HeroProperties[1]);
+            attackSpeed = float.Parse(characterConfig.HeroProperties[2]);
+            meleeWeaponName = characterConfig.HeroProperties[3];
+            meleeDamageAplification = float.Parse(characterConfig.HeroProperties[4]);
+            rangeWeaponName = characterConfig.HeroProperties[5];
+            rangeDamageAplification = float.Parse(characterConfig.HeroProperties[6]);
+            firstAbilityId = int.Parse(characterConfig.HeroProperties[7]);
+            secondAbilityId = int.Parse(characterConfig.HeroProperties[8]);
+            thirdAbilityId = int.Parse(characterConfig.HeroProperties[9]);
+            ultimateAbilityId = int.Parse(characterConfig.HeroProperties[10]);
+            power = int.Parse(characterConfig.HeroProperties[11]);
+            health = int.Parse(characterConfig.HeroProperties[12]);
+            movementSpeed = int.Parse(characterConfig.HeroProperties[13]);
+
+        }
         public void SetData(HeroSheetsData data)
         {
             HeroOptions realData = data.HeroOptionsList[0];

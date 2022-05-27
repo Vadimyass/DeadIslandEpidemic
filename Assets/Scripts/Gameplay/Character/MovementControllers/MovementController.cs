@@ -9,6 +9,7 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 using Plane = UnityEngine.Plane;
 using static Gameplay.Character.CombatController;
+using Zenject;
 
 namespace Gameplay.Character.MovementControllers
 {
@@ -16,7 +17,7 @@ namespace Gameplay.Character.MovementControllers
     {
         private float _speed;
 
-        private CharacterAnimationController _characterAnimationController;
+        [SerializeField] private CharacterAnimationController _characterAnimationController;
         
         private Vector3 _playerMovement;
         public void RotateCharacaterByTheMouse()
@@ -33,6 +34,14 @@ namespace Gameplay.Character.MovementControllers
                 ClientSend.SendPlayerRotation(transform.rotation);
             }
         }
+
+        [Inject]
+        private void Construct(HeroData heroData, CharacterAnimationController characterAnimationController)
+        {
+            _speed = heroData.movementSpeed;
+            _characterAnimationController = characterAnimationController;
+        }
+
         public void SetParams(float moveSpeed ,CharacterAnimationController characterAnimationController )
         {
             _speed = moveSpeed;

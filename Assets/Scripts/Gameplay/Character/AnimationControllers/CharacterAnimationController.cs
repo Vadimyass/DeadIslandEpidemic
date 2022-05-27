@@ -3,19 +3,23 @@ using DeadIsland.Events;
 using Gameplay.Character.MovementControllers;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 using static Gameplay.Character.CombatController;
 
 namespace Gameplay.Character.AnimationControllers
 {
     public class CharacterAnimationController : MonoBehaviour
     {
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
         private bool _isAttacking = false;
 
-        private void Awake()
+        [Inject]
+        private void Construct()
         {
             _animator = gameObject.GetComponent<Animator>();
         }
+
+        
         public void SetSpeedToBlendTree(float speed)
         {
             _animator.SetFloat("Speed",speed);
